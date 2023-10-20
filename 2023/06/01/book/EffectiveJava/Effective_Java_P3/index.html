@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="huangkebing">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/06/01/book/effectivejava/effective_java_p3/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="Effective Java 第三章.对于所有对象都通用的方法 读书笔记以及个人理解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective Java_第3章">
+<meta property="og:url" content="http://example.com/2023/06/01/book/EffectiveJava/Effective_Java_P3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Effective Java 第三章.对于所有对象都通用的方法 读书笔记以及个人理解">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-01T09:12:18.000Z">
+<meta property="article:modified_time" content="2023-10-20T10:39:33.996Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Effective Java">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/favicon.ico" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Effective Java_第3章 -
+        
+        technology-inn
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"记录，成为更好的自己","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/huangkebing","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"记录，成为更好的自己","links":{"标签":{"path":"/tags","icon":"fa-regular fa-tags"},"分类":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/10/20 06:22:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                technology-inn
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">Effective Java_第3章</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header flex flex-row gap-2 items-center">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/avatar.png">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">huangkebing</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-06-01 17:12:18</span>
+        <span class="mobile">2023-06-01 17:12:18</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-10-20 18:39:33</span>
+            <span class="mobile">2023-10-20 18:39:33</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Effective-Java/">Effective Java</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2.3k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>9 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <h2 id="第10条、覆盖equals时请遵守通用约定"><a href="#第10条、覆盖equals时请遵守通用约定" class="headerlink" title="第10条、覆盖equals时请遵守通用约定"></a>第10条、覆盖equals时请遵守通用约定</h2><p>覆盖 equals 方法看起来似乎很简单，但是有许多覆盖方式会导致错误，并且后果非常严重</p>
+<p>最容易避免这类问题的办法就是不覆盖 equals 方法，在这种情况下，类的每个实例都只与自身相等</p>
+<p>如果满足了以下任何一个条件，则无需覆盖equals方法：</p>
+<ul>
+<li><p>类的每个实例都是唯一的</p>
+<p>因为Object提供的equals方法就是比较二者是否为同一个对象，既然每个实例都是唯一的，那么如果不是同一个对象也必然是不相等的</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>类没有必要提供equals方法，从Object继承得到的equals足够使用</p>
+</li>
+<li><p>父类已经覆盖了equals，子类也能使用父类的equals</p>
+<p>如ArrayList直接使用了AbstractList中覆盖的equals方法</p>
+</li>
+<li><p>类是私有的，或者是包级私有的，即 equals 方法永远不会被调用</p>
+<p>但反射是可以实例化私有类的，因此想要彻底保护，可以重写equals方法并在方法中抛出异常</p>
+</li>
+</ul>
+<p>而当对象需要比较字段值，而父类又没有覆盖equals时，就需要覆盖equals。如String、Integer等</p>
+<p>在覆盖 equals 方法的时候，必须要遵守它的通用约定：</p>
+<ul>
+<li>自反性(reflexive)：对于任何非 null 的引用值 x，<code>x.equals(x)</code> 必须返回true </li>
+<li>对称性(symmetric)：对于任何非 null 的引用值 x 和 y，当且仅当 <code>y.equals(x)</code> 返回 true 时，<code> x.equals(y)</code> 也必须返回 true </li>
+<li>传递性(transitive)：对于任何非 null 的引用值 x、y和z，如果<code> x.equals(y)</code> 返回 true ，并且 <code>y.equals(z)</code> 也返回 true ，那么 <code>x.equals(z)</code> 也必须返回 true </li>
+<li>一致性(consistent)：对于任何非 null 引用值 x 和 y，只要 equals 的比较操作在对象中所用的信息没有被修改，多次调用 <code>x.equals(y)</code> 就会一致地返回true, 或者一致地返回 false </li>
+<li>对于任何非 null 的引用值 x , <code>x.equals (null)</code> 必须返回 false</li>
+</ul>
+<p>基于这些约定，有一些优秀的实践，在很多源码中都能找到这些实践：</p>
+<ol>
+<li><p>使用 &#x3D;&#x3D; 操作符检查“参数是否为这个对象的引用”。如果是，则返回 true</p>
+<p>因为同一个对象的两个引用，肯定是相等的。如果比较操作代价较大，可以作为一种性能优化</p>
+</li>
+<li><p>使用 instanceof 操作符检查“参数是否为正确的类型” 如果不是，则返回 false</p>
+</li>
+<li><p>把参数转换成正确的类型</p>
+</li>
+<li><p>对于该类中的每个“关键”（ significant ）域，检查参数中的域是否与该对象中对应的域相匹配</p>
+<p>对于基本数据类型的关键域，使用 &#x3D;&#x3D; 比较，对于引用数据类型，使用其 equals 比较</p>
+</li>
+</ol>
+<p><font color="#16b777">使用IDEA，可以Ctrl+O，选择要比较的字段，快速实现equals方法，比较便利</font></p>
+<h2 id="第11条、覆盖equals时总要覆盖hashCode"><a href="#第11条、覆盖equals时总要覆盖hashCode" class="headerlink" title="第11条、覆盖equals时总要覆盖hashCode"></a>第11条、覆盖equals时总要覆盖hashCode</h2><p>在每个覆盖了 equals 方法的类中，都必须覆盖 hashCode 方法。如果不这样做的话，就会违反 hashCode 的通用约定，从而导致该类无法结合所有基于散列的集合一起正常运作，如HashMap、HashSet等</p>
+<p>下面是 hashCode 约定的内容，摘自 Object 规范：</p>
+<ul>
+<li>在应用程序的执行期间，只要对象的 equals 方法的比较操作所用到的信息没有被修改，那么对同一个对象的多次调用， hashCode 方法都必须始终返回<strong>同一个值</strong>。在一个应用程序与另一个程序的执行过程中，执行 hashCode 方法所返回的值可以不一致</li>
+<li>如果两个对象根据 equals(Object) 方法比较结果是相等的，那么调用这两个对象中的 hashCode 方法都必须产生同样的整数结果</li>
+<li>如果两个对象根据 equals(Object) 方法比较是不相等的，那么调用这两个对象中的 hashCode 方法，则不一定要求 hashCode 方法必须产生不同的结果。但是，给不相等的对象产生截然不同的整数结果，有可能提高散列表（ hash table ）的性能</li>
+</ul>
+<p>而覆盖equals没有覆盖hashCode，违背了第二条规范，在使用如HashMap时，可能就会出问题：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个类，重写equals不重写hashcode</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span> == o) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="literal">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span> (Person) o;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> name.equals(person.name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Person&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建两个字段值相同的对象，其实map中存放了2个，没有覆盖</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    Map&lt;Person, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    map.put(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;J&quot;</span>), <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;J&quot;</span>), <span class="number">2</span>);</span><br><span class="line">    <span class="comment">// &#123;Person&#123;name=&#x27;J&#x27;&#125;=2, Person&#123;name=&#x27;J&#x27;&#125;=1&#125;</span></span><br><span class="line">    System.out.println(map);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>至于如果重写hashCode方法，现在的工具非常多，不需要我们自己再去花心思实现。</p>
+<p><font color="#16b777">使用IDEA，可以Ctrl+O，选择要比较的字段，快速实现equals方法。此外lombok的@Data注解也会自动生成hashCode方法</font></p>
+<h2 id="第12条、始终要覆盖toString"><a href="#第12条、始终要覆盖toString" class="headerlink" title="第12条、始终要覆盖toString"></a>第12条、始终要覆盖toString</h2><p>还是用上面Person的例子，对比一下覆盖与不覆盖toString的区别：</p>
+<div class="highlight-container" data-rel="Txt"><figure class="iseeu highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">不覆盖：</span><br><span class="line">&#123;Person@7f31245a=2, Person@14ae5a5=1&#125;</span><br><span class="line">覆盖</span><br><span class="line">&#123;Person&#123;name=&#x27;J&#x27;&#125;=2, Person&#123;name=&#x27;J&#x27;&#125;=1&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>可以发现，如果不覆盖toString，哪怕日志中将该对象打印出来，也看不出任何信息跟没打印没有区别！</p>
+<p>覆盖toString后就可以获取到信息，从而帮助我们快速定位问题。但也要注意量，最好只输出有必要的字段。</p>
+<p>IDEA中，同样的Ctrl+O可以快速实现toString；Lombok的@Data注解也会自动生成toString方法</p>
+<h2 id="第13条、谨慎地覆盖clone"><a href="#第13条、谨慎地覆盖clone" class="headerlink" title="第13条、谨慎地覆盖clone"></a>第13条、谨慎地覆盖clone</h2><p>覆盖clone方法，还需要实现cloneable接口，否则在调用clone时会抛异常</p>
+<p>clone 方法的通用约定是非常弱的，下面是来自 Object 规范中的约定内容： </p>
+<p>创建和返回该对象的一个拷贝，这个“拷贝”的精确含义取决于该对象的类。一般的含义是，对于任何对象 ，表达式 <code>x.clone() != x</code>  将会返回结果 true ，并且表达式 <code>x.clone().getClass() == x.getClass()</code>  将会返回结果 true</p>
+<p>但这些都不是绝对的要求。虽然通常情况下，表达式 <code>x.clone() .equals(x)</code>  将会返回结果 true ，但是，这也不是个绝对的要求按照约定</p>
+<p>这个方法返回的对象应该通过调用 super.clone 获得 如果类及其 超类（Object 除外）遵守这 约定，那么： x.clone() .getClass() &#x3D;&#x3D; x.getClass() . </p>
+<p><font color="#16b777">书中提到，clone方法的约定非常弱。通常我们定义的业务类很少会覆盖clone方法，如果要提供拷贝，更多是选择拷贝构造器或拷贝工厂</font></p>
+<h2 id="第14条、考虑实现Comparable接口"><a href="#第14条、考虑实现Comparable接口" class="headerlink" title="第14条、考虑实现Comparable接口"></a>第14条、考虑实现Comparable接口</h2><p>类实现了 Comparable 接口，就表明它的实例具有 内在的排序关系 (natural ordering)，一旦类实现了 Comparable 接口，它就可 以跟许多泛型算法（ generic algorithm ）以及 依赖于该接口的集合实现（ collection implementation ）进行协作。</p>
+<p>如果我们定义的类有明确的大小关系，那么可以考虑实现Comparable接口</p>
+<p>compareTo 方法的通用约定与 equals 方法的约定相似：</p>
+<p>将这个对象与指定的对象进行比较，当该对象小于、等于或大于指定对象的时候， 分别返回一个负整数、零或者正整数。如果由于指定对象的类型而无法与该对象进行比较，则抛出 ClassCastException 异常。</p>
+<ul>
+<li>实现者必须确保所有的 都满足 sgn(x.compareTo(y)) &#x3D;&#x3D; -sgn(y.compareTo(x)) （这也暗示着，当且仅当y.compareTo (x) 抛出异常时，x.compareTo(y) 才必须抛出异常</li>
+<li>实现者还必须确保这个比较关系是可传递的 x.compareTo(y) &gt; 0 &amp;&amp; y. compareTo(z) &gt; 0 暗示着 x.compareTo(z) &gt; 0</li>
+<li>最后，实现者必须确保 x.compareTo(y) &#x3D;&#x3D; 0，暗示着所有的 z 都满足 sgn(x.compareTo(z)) &#x3D;&#x3D; sgn(y.compareTo(z))</li>
+<li>强烈建议 (x.compareTo (y) &#x3D;&#x3D; 0) &#x3D;&#x3D; (x.equals(y))，但这并非绝对必要。一般说来，任何实现了 Comparable 接口的类，若违反了这个条件，都应该明确予以说明。推荐使用这样的说法：“注意：该类具有内在的排序功能，但是与 equals 不一致”<ul>
+<li>即如果x、y相等，那么compareTo方法最好返回0</li>
+</ul>
+</li>
+</ul>
+<p>总而言之，每当实现一个对排序敏感的类时，都应该让这个类实现 Comparable 接口，以便其实例可以轻松地被分类、搜索，以及用在基于比较的集合中。每当在 compareTo 方法的实现中比较域值时，都要避免使用 &lt; 和 &gt; 操作符，而应该在装箱基本类型的类中使用静态的 compare 方法，或者在 Comparator 接口中使用比较器构造方法</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 装箱基本类型的compareTo方法，其实也是使用静态的 compare 方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Integer anotherInteger)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> compare(<span class="built_in">this</span>.value, anotherInteger.value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Effective-Java/">#Effective Java</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/06/05/design_pattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_%E7%BB%93%E6%9E%84%E5%9E%8B/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">设计模式_结构型</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/05/30/algorithm/offer/%E5%89%91%E6%8C%87Offer_Part2/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">剑指Offer_Part.2</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">Effective Java_第3章</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC10%E6%9D%A1%E3%80%81%E8%A6%86%E7%9B%96equals%E6%97%B6%E8%AF%B7%E9%81%B5%E5%AE%88%E9%80%9A%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-text">第10条、覆盖equals时请遵守通用约定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC11%E6%9D%A1%E3%80%81%E8%A6%86%E7%9B%96equals%E6%97%B6%E6%80%BB%E8%A6%81%E8%A6%86%E7%9B%96hashCode"><span class="nav-text">第11条、覆盖equals时总要覆盖hashCode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC12%E6%9D%A1%E3%80%81%E5%A7%8B%E7%BB%88%E8%A6%81%E8%A6%86%E7%9B%96toString"><span class="nav-text">第12条、始终要覆盖toString</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC13%E6%9D%A1%E3%80%81%E8%B0%A8%E6%85%8E%E5%9C%B0%E8%A6%86%E7%9B%96clone"><span class="nav-text">第13条、谨慎地覆盖clone</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC14%E6%9D%A1%E3%80%81%E8%80%83%E8%99%91%E5%AE%9E%E7%8E%B0Comparable%E6%8E%A5%E5%8F%A3"><span class="nav-text">第14条、考虑实现Comparable接口</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">huangkebing</a>
+        </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.5.0</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>
