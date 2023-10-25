@@ -13,22 +13,22 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2023/08/14/algorithm/专项/算法题专项_位运算/"/>
+    <link rel="canonical" href="http://example.com/2023/10/25/algorithm/lcr/lcr_part3/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="在基础刷题过程中，发现很多位运算题没有思路，加之平时位运算接触非常少。通过一次专项对位运算做一次集中练习。">
+        <meta name="description" content="LCR(又名剑指offer2)系列算法题，第三部分——41至60题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法题专项突破[位运算]">
-<meta property="og:url" content="http://example.com/2023/08/14/algorithm/%E4%B8%93%E9%A1%B9/%E7%AE%97%E6%B3%95%E9%A2%98%E4%B8%93%E9%A1%B9_%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:title" content="LCR_Part.3">
+<meta property="og:url" content="http://example.com/2023/10/25/algorithm/LCR/LCR_Part3/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在基础刷题过程中，发现很多位运算题没有思路，加之平时位运算接触非常少。通过一次专项对位运算做一次集中练习。">
+<meta property="og:description" content="LCR(又名剑指offer2)系列算法题，第三部分——41至60题">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-14T06:26:17.000Z">
-<meta property="article:modified_time" content="2023-10-25T01:18:47.443Z">
+<meta property="article:published_time" content="2023-10-25T01:56:59.000Z">
+<meta property="article:modified_time" content="2023-10-25T02:15:13.771Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="算法专项突破">
+<meta property="article:tag" content="算法基础提升">
 <meta name="twitter:card" content="summary">
     
     
@@ -41,7 +41,7 @@
     
     <title>
         
-            算法题专项突破[位运算] -
+            LCR_Part.3 -
         
         technology-inn
     </title>
@@ -245,7 +245,7 @@
 
         <div class="article-title">
             
-                <h1 class="article-title-regular">算法题专项突破[位运算]</h1>
+                <h1 class="article-title-regular">LCR_Part.3</h1>
             
             </div>
             
@@ -265,15 +265,15 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-08-14 14:26:17</span>
-        <span class="mobile">2023-08-14 14:26:17</span>
+        <span class="desktop">2023-10-25 09:56:59</span>
+        <span class="mobile">2023-10-25 09:56:59</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-25 09:18:47</span>
-            <span class="mobile">2023-10-25 09:18:47</span>
+            <span class="desktop">2023-10-25 10:15:13</span>
+            <span class="mobile">2023-10-25 10:15:13</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -301,7 +301,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">算法专项突破</a>&nbsp;
+                        <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%8F%90%E5%8D%87/">算法基础提升</a>&nbsp;
                     </li>
                 
             </ul>
@@ -311,7 +311,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>284 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>400 字</span>
         </span>
     
     
@@ -331,48 +331,26 @@
 
 
         <div class="article-content markdown-body">
-            <h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><p>首先来明确一下Java中有哪些位运算符，以及各自的运算规则</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>规则</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>&amp;</code></td>
-<td>两者均为1时，结果为1。如1101&amp;1011&#x3D;1001</td>
-</tr>
-<tr>
-<td>&#96;</td>
-<td>&#96;</td>
-</tr>
-<tr>
-<td><code>~</code></td>
-<td>取反，如~1101&#x3D;0010</td>
-</tr>
-<tr>
-<td><code>^</code></td>
-<td>异或，两者相同时为1，不同为1。如1101^1011&#x3D;0110</td>
-</tr>
-<tr>
-<td><code>&lt;&lt;</code></td>
-<td>左移运算，将二进制串整体左移，低位补0</td>
-</tr>
-<tr>
-<td><code>&gt;&gt;</code></td>
-<td>右移运算，将二进制串整体右移，高位补符号位(即正数补0，负数补1)</td>
-</tr>
-<tr>
-<td><code>&gt;&gt;&gt;</code></td>
-<td>无符号右移运算，将二进制串整体右移，高位补0</td>
-</tr>
-</tbody></table>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>明确了位运算符后，还需要积累应用场景，因为算法题中不会说让你求a&amp;b，更多的是抽象过的要求，这就考验我们能否将问题和位运算关联起来</p>
-<p>下面记录一下，在算法基础提升阶段遇到的位运算应用场景</p>
-<h3 id="判断尾位是否为1"><a href="#判断尾位是否为1" class="headerlink" title="判断尾位是否为1"></a>判断尾位是否为1</h3><p>利于<code>&amp;</code>符号的特性，n&amp;1如果为1，说明n的尾位是1</p>
-<p>同样的，如果n&amp;1&#x3D;0，说明n的尾位是0</p>
+            <h2 id="41、数据流中的移动平均值"><a href="#41、数据流中的移动平均值" class="headerlink" title="41、数据流中的移动平均值"></a><font color="green">41、数据流中的移动平均值</font></h2><p>给定一个窗口大小和一个整数数据流，根据该滑动窗口的大小，计算滑动窗口里所有数字的平均值。</p>
+<p>实现 <code>MovingAverage</code> 类：</p>
+<ul>
+<li><code>MovingAverage(int size)</code> 用窗口大小 <code>size</code> 初始化对象。</li>
+<li><code>double next(int val)</code> 成员函数 <code>next</code> 每次调用的时候都会往滑动窗口增加一个整数，请计算并返回数据流中最后 <code>size</code> 个值的移动平均值，即滑动窗口里所有数字的平均值。</li>
+</ul>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">输入：</span><br><span class="line">inputs = [&quot;MovingAverage&quot;, &quot;next&quot;, &quot;next&quot;, &quot;next&quot;, &quot;next&quot;]</span><br><span class="line">inputs = [[3], [1], [10], [3], [5]]</span><br><span class="line">输出：</span><br><span class="line">[null, 1.0, 5.5, 4.66667, 6.0]</span><br><span class="line"></span><br><span class="line">解释：</span><br><span class="line">MovingAverage movingAverage = new MovingAverage(3);</span><br><span class="line">movingAverage.next(1); // 返回 1.0 = 1 / 1</span><br><span class="line">movingAverage.next(10); // 返回 5.5 = (1 + 10) / 2</span><br><span class="line">movingAverage.next(3); // 返回 4.66667 = (1 + 10 + 3) / 3</span><br><span class="line">movingAverage.next(5); // 返回 6.0 = (10 + 3 + 5) / 3</span><br></pre></td></tr></table></figure></div>
 
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= size &lt;= 1000</code></li>
+<li><code>-10^5 &lt;= val &lt;= 10^5</code></li>
+<li>最多调用 <code>next</code> 方法 <code>10^4</code> 次</li>
+</ul>
+<p>注意：本题与主站 346 题相同： <a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/moving-average-from-data-stream/" >https://leetcode-cn.com/problems/moving-average-from-data-stream/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<div class="note-large green"><div class="notel-title"><p>题解思路</p>
+</div><div class="notel-content"><p>数据流的特征是先进先出，因此可以确定保存窗口内的元素需要使用队列。此外为了避免每次都要计算队列内元素的和，可以维护一个变量sum，减少重复求和</p>
+</div></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MovingAverage</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Deque&lt;Integer&gt; deque;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MovingAverage</span><span class="params">(<span class="type">int</span> size)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.size = size;</span><br><span class="line">        <span class="built_in">this</span>.deque = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;(size);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">next</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (deque.size() &gt;= size) &#123;</span><br><span class="line">            <span class="type">Integer</span> <span class="variable">remove</span> <span class="operator">=</span> deque.removeFirst();</span><br><span class="line">            sum -= remove;</span><br><span class="line">        &#125;</span><br><span class="line">        deque.add(val);</span><br><span class="line">        sum += val;</span><br><span class="line">        <span class="keyword">return</span> sum / deque.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
         </div>
 
         
@@ -381,7 +359,7 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">#算法专项突破</a>&nbsp;
+                        <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%8F%90%E5%8D%87/">#算法基础提升</a>&nbsp;
                     </li>
                 
             </ul>
@@ -392,29 +370,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                        rel="prev"
-                        href="/2023/08/18/frame/springcloud/%E5%88%9D%E8%AF%86SpringCloud/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">初识Spring Cloud</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                         rel="next"
-                        href="/2023/08/02/algorithm/LCR/LCR_Part1/"
+                        href="/2023/10/20/blogs/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">LCR_Part.1</span>
+                                <span class="post-nav-title-item">优秀博文收藏</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -435,8 +398,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">算法题专项突破[位运算]</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%B0%BE%E4%BD%8D%E6%98%AF%E5%90%A6%E4%B8%BA1"><span class="nav-text">判断尾位是否为1</span></a></li></ol></li></ol>
+        <div class="page-title">LCR_Part.3</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#41%E3%80%81%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87%E5%80%BC"><span class="nav-text">41、数据流中的移动平均值</span></a></li></ol>
 
     </div>
 </div>
