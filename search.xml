@@ -461,22 +461,8 @@
   <entry>
     <title>初识Spring Cloud</title>
     <url>/2023/08/18/frame/springcloud/%E5%88%9D%E8%AF%86SpringCloud/</url>
-    <content><![CDATA[<p>官方文档：<a class="link"   href="https://spring.io/projects/spring-cloud#overview" >Spring Cloud <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h2 id="一、问题记录-解答"><a href="#一、问题记录-解答" class="headerlink" title="一、问题记录&amp;解答"></a>一、问题记录&amp;解答</h2><blockquote>
-<p>Q1: 到底什么是Spring Cloud？有什么用处？</p>
-</blockquote>
-<p><font color="#1e9fff">以下内容翻译自官方文档</font></p>
-<p>Spring Cloud为开发人员提供了工具，可以快速构建分布式系统中的一些常见模式（例如配置管理、服务发现、熔断、智能路由、微代理、控制总线）。使用Spring Cloud的开发人员可以快速建立实现这些模式的服务和应用程序。它们将在任何分布式环境中运行良好，包括开发人员自己的笔记本电脑、裸机数据中心和Cloud Foundry等托管平台。</p>
-<p>Spring Cloud专注于为典型场景提供良好的开箱即用体验和覆盖其他用例的可扩展性机制：</p>
-<p>分布式&#x2F;版本化配置、服务注册和发现、路由、服务到服务调用、负载均衡、熔断、分布式消息传递</p>
-<hr>
-<p>那么从这段话中，可以理解为就像Spring Boot提供快速服务搭建一样，Spring Cloud提供了分布式中的一些典型场景的快速搭建</p>
-<blockquote>
-<p>Q2: Spring Cloud Azure、Spring Cloud Alibaba这些又是什么？和Spring Cloud有什么关系？</p>
-</blockquote>
-<h2 id="二、Spring-Cloud模块"><a href="#二、Spring-Cloud模块" class="headerlink" title="二、Spring Cloud模块"></a>二、Spring Cloud模块</h2><p>跟据文档，可以看到Spring Cloud由很多子模块组成。如spring-cloud-build、spring-cloud-bus、spring-cloud-circuitbreaker等等，共计16个。就一个一个来，逐个学习</p>
-<h3 id="spring-cloud-commons"><a href="#spring-cloud-commons" class="headerlink" title="spring-cloud-commons"></a>spring-cloud-commons</h3><p>之所以从commons开始，是因为以commons命名的，通常就是最核心的部分！</p>
-]]></content>
+    <content><![CDATA[<h2 id="一、架构演变"><a href="#一、架构演变" class="headerlink" title="一、架构演变"></a>一、架构演变</h2><p>要了解SpringCloud就离不开微服务，那就必须要了解为什么会演变出微服务，微服务相比其他架构具备什么优势</p>
+<h3 id="1-1-集中式架构"><a href="#1-1-集中式架构" class="headerlink" title="1.1 集中式架构"></a>1.1 集中式架构</h3>]]></content>
       <categories>
         <category>框架</category>
       </categories>
@@ -1092,7 +1078,7 @@
 <h2 id="四、简单总结"><a href="#四、简单总结" class="headerlink" title="四、简单总结"></a>四、简单总结</h2><p>使用好工具类可以达到事半功倍、简化代码的效果。但使用前需要深入调研，充分了解后再觉得是否使用，考验平时的积累</p>
 ]]></content>
       <categories>
-        <category>工具包</category>
+        <category>工具</category>
       </categories>
       <tags>
         <tag>Apache Commons</tag>
@@ -1353,7 +1339,12 @@
   <entry>
     <title>优秀博文收藏</title>
     <url>/2023/10/20/blogs/</url>
-    <content><![CDATA[<h1 id="好文收集"><a href="#好文收集" class="headerlink" title="好文收集"></a>好文收集</h1><h2 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h2><p><a class="link"   href="https://blog.csdn.net/qq_44112474/article/details/109047883" >SpringCloud入门(总体认识) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+    <content><![CDATA[<h1 id="好文收集"><a href="#好文收集" class="headerlink" title="好文收集"></a>好文收集</h1><h2 id="博客搭建文档"><a href="#博客搭建文档" class="headerlink" title="博客搭建文档"></a>博客搭建文档</h2><ol>
+<li><a class="link"   href="https://hexo.io/zh-cn/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   href="https://redefine-docs.ohevan.com/getting-started" >redefine主题 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   href="https://mermaid.js.org/intro/" >mermaid流程图 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ol>
+<h2 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h2><p><a class="link"   href="https://blog.csdn.net/qq_44112474/article/details/109047883" >SpringCloud入门(总体认识) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 ]]></content>
   </entry>
   <entry>
@@ -3452,6 +3443,265 @@
       </categories>
       <tags>
         <tag>算法基础提升</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mermaid语法大全</title>
+    <url>/2023/10/25/util/mermaid/</url>
+    <content><![CDATA[<h2 id="一、绘图方向"><a href="#一、绘图方向" class="headerlink" title="一、绘图方向"></a>一、绘图方向</h2><table>
+<thead>
+<tr>
+<th>方向代码</th>
+<th>方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TB</td>
+<td>从上到下</td>
+</tr>
+<tr>
+<td>TD</td>
+<td>自上而下&#x2F;与上到下相同</td>
+</tr>
+<tr>
+<td>BT</td>
+<td>从下到上</td>
+</tr>
+<tr>
+<td>RL</td>
+<td>从右到左</td>
+</tr>
+<tr>
+<td>LR</td>
+<td>从左到右</td>
+</tr>
+</tbody></table>
+<p>示例：LR即从左到右</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">    Start --&gt; Stop</span><br></pre></td></tr></table></figure></div>
+<pre class="mermaid">flowchart LR
+    Start --> Stop</pre>
+
+<h2 id="二、结点形状"><a href="#二、结点形状" class="headerlink" title="二、结点形状"></a>二、结点形状</h2><p>在方向示例中可以看到，结点的默认形状是一个矩形，而例如流程图中形状也有不同含义</p>
+<table>
+<thead>
+<tr>
+<th>形状代码</th>
+<th>形状</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>node</code></td>
+<td>默认矩形，但图形内的文字就是node</td>
+</tr>
+<tr>
+<td><code>node[text]</code></td>
+<td>矩形，图形内文字为括号[]中的文字</td>
+</tr>
+<tr>
+<td><code>node(text)</code></td>
+<td>圆角矩形</td>
+</tr>
+<tr>
+<td><code>node([text])</code></td>
+<td>半圆矩阵，即常用的流程图中的开始&#x2F;结束结点</td>
+</tr>
+<tr>
+<td><code>node[[text]]</code></td>
+<td>子程序形状</td>
+</tr>
+<tr>
+<td><code>node[(text)]</code></td>
+<td>圆柱形状，通常是数据库会使用该形状</td>
+</tr>
+<tr>
+<td><code>node((text))</code></td>
+<td>圆形</td>
+</tr>
+<tr>
+<td><code>node&gt;text]</code></td>
+<td>不对称形状</td>
+</tr>
+<tr>
+<td><code>node&#123;text&#125;</code></td>
+<td>菱形，通常用作流程图中的判断</td>
+</tr>
+<tr>
+<td><code>node&#123;&#123;text&#125;&#125;</code></td>
+<td>菱边矩形</td>
+</tr>
+<tr>
+<td><code>node[/text/]</code></td>
+<td>平行四边形</td>
+</tr>
+<tr>
+<td><code>node[\text\]</code></td>
+<td>反平行四边形</td>
+</tr>
+<tr>
+<td><code>node[/text\]</code></td>
+<td>梯形</td>
+</tr>
+<tr>
+<td><code>node[\text/]</code></td>
+<td>倒梯形</td>
+</tr>
+<tr>
+<td><code>node(((text)))</code></td>
+<td>双圆</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">	A&gt;text] --&gt; B&#123;text&#125;--&gt;C[/text\]--&gt;D(((text)))</span><br></pre></td></tr></table></figure></div>
+
+<pre class="mermaid">flowchart LR
+    A>text] --> B{text}-->C[/text\]-->D(((text)))</pre>
+
+
+
+<h2 id="三、连接样式"><a href="#三、连接样式" class="headerlink" title="三、连接样式"></a>三、连接样式</h2><h3 id="3-1-线条样式"><a href="#3-1-线条样式" class="headerlink" title="3.1 线条样式"></a>3.1 线条样式</h3><p>线条样式分为3种：实线、虚线和粗实线：</p>
+<table>
+<thead>
+<tr>
+<th>线条代码</th>
+<th>样式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>A---B</code></td>
+<td>实线</td>
+</tr>
+<tr>
+<td><code>A-.-B</code></td>
+<td>虚线</td>
+</tr>
+<tr>
+<td><code>A===B</code></td>
+<td>粗实线</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">	A---B-.-C===D</span><br></pre></td></tr></table></figure></div>
+
+<pre class="mermaid">flowchart LR
+    A---B-.-C===D</pre>
+
+<h3 id="3-2-箭头样式"><a href="#3-2-箭头样式" class="headerlink" title="3.2 箭头样式"></a>3.2 箭头样式</h3><p>箭头样式有4种：箭头、无箭头、圆形和x形</p>
+<table>
+<thead>
+<tr>
+<th>箭头代码</th>
+<th>样式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>A--&gt;B</code></td>
+<td>箭头</td>
+</tr>
+<tr>
+<td><code>A---B</code></td>
+<td>无箭头</td>
+</tr>
+<tr>
+<td><code>A--oB</code></td>
+<td>圆形</td>
+</tr>
+<tr>
+<td><code>A--xB</code></td>
+<td>x形</td>
+</tr>
+<tr>
+<td><code>A&lt;--&gt;B</code></td>
+<td>双箭头</td>
+</tr>
+<tr>
+<td><code>Ao--oB</code></td>
+<td>双圆形</td>
+</tr>
+<tr>
+<td><code>Ax--xB</code></td>
+<td>双x形</td>
+</tr>
+</tbody></table>
+<div class="note red"><p>使用中发现，如Dx–xE，并不会解析为双x形，而是会认为Dx是一个结点</p>
+</div>
+
+<p>示例：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">	A--&gt;B---C--oD(text)x--xE</span><br></pre></td></tr></table></figure></div>
+
+<pre class="mermaid">flowchart LR
+    A-->B---C--oD(text)x--xE</pre>
+
+<h3 id="3-3-线条长度"><a href="#3-3-线条长度" class="headerlink" title="3.3 线条长度"></a>3.3 线条长度</h3><p>添加符号数量来增加连接线长度，实线增加<code>-</code>，虚线增加<code>.</code>，粗实线增加<code>=</code></p>
+<table>
+<thead>
+<tr>
+<th align="left">长度</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">实线</td>
+<td align="center"><code>---</code></td>
+<td align="center"><code>----</code></td>
+<td align="center"><code>-----</code></td>
+</tr>
+<tr>
+<td align="left">带箭头的实线</td>
+<td align="center"><code>--&gt;</code></td>
+<td align="center"><code>---&gt;</code></td>
+<td align="center"><code>----&gt;</code></td>
+</tr>
+<tr>
+<td align="left">粗实线</td>
+<td align="center"><code>===</code></td>
+<td align="center"><code>====</code></td>
+<td align="center"><code>=====</code></td>
+</tr>
+<tr>
+<td align="left">带箭头的粗实线</td>
+<td align="center"><code>==&gt;</code></td>
+<td align="center"><code>===&gt;</code></td>
+<td align="center"><code>====&gt;</code></td>
+</tr>
+<tr>
+<td align="left">虚线</td>
+<td align="center"><code>-.-</code></td>
+<td align="center"><code>-..-</code></td>
+<td align="center"><code>-...-</code></td>
+</tr>
+<tr>
+<td align="left">带箭头的虚线</td>
+<td align="center"><code>-.-&gt;</code></td>
+<td align="center"><code>-..-&gt;</code></td>
+<td align="center"><code>-...-&gt;</code></td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">	A---B===&gt;C&lt;-...-&gt;D</span><br></pre></td></tr></table></figure></div>
+
+<pre class="mermaid">flowchart LR
+    A---B===>C<-...->D</pre>
+
+<h3 id="3-4-线条文字"><a href="#3-4-线条文字" class="headerlink" title="3.4 线条文字"></a>3.4 线条文字</h3><p>通常连接线上，还需要添加说明文字，按官方文档中有两种写法：</p>
+<ul>
+<li><code>A--&gt;|text|B</code></li>
+<li><code>A--text--&gt;B</code></li>
+</ul>
+<p>这里我个人感觉使用第一种更清晰一些，因为使用<code>|</code>符号来表示文字，而线条的代码照旧。但第二种却需要变化线条的代码，增加了记忆上的难度。</p>
+<p>如示例中，展示了带文字的虚线箭头，相比较下第一种写法更简单一些：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">	A-.text.-&gt;B-.-&gt;|text|C</span><br></pre></td></tr></table></figure></div>
+
+<pre class="mermaid">flowchart LR
+    A-.text.->B-.->|text|C</pre>
+
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>mermaid</tag>
       </tags>
   </entry>
 </search>
