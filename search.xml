@@ -3448,7 +3448,11 @@
   <entry>
     <title>mermaid语法大全</title>
     <url>/2023/10/25/util/mermaid/</url>
-    <content><![CDATA[<h2 id="一、绘图方向"><a href="#一、绘图方向" class="headerlink" title="一、绘图方向"></a>一、绘图方向</h2><table>
+    <content><![CDATA[<p>官方文档：<a class="link"   href="https://mermaid.js.org/intro/" >About Mermaid | Mermaid <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>mermaid中提供了10+种图形，但一些图形用的比较少。另外奇怪的是，为什么没有提供柱状图和折线图</p>
+<h2 id="一、流程图"><a href="#一、流程图" class="headerlink" title="一、流程图"></a>一、流程图</h2><p>流程图使用非常多，当一些逻辑比较复杂时，用一堆文字去描述的效果往往不如一张流程图</p>
+<p>使用<code>flowchart</code>来定义流程图</p>
+<h3 id="1-1-绘图方向"><a href="#1-1-绘图方向" class="headerlink" title="1.1 绘图方向"></a>1.1 绘图方向</h3><table>
 <thead>
 <tr>
 <th>方向代码</th>
@@ -3481,7 +3485,7 @@
 <pre class="mermaid">flowchart LR
     Start --> Stop</pre>
 
-<h2 id="二、结点形状"><a href="#二、结点形状" class="headerlink" title="二、结点形状"></a>二、结点形状</h2><p>在方向示例中可以看到，结点的默认形状是一个矩形，而例如流程图中形状也有不同含义</p>
+<h3 id="1-2-结点形状"><a href="#1-2-结点形状" class="headerlink" title="1.2 结点形状"></a>1.2 结点形状</h3><p>在方向示例中可以看到，结点的默认形状是一个矩形，而例如流程图中形状也有不同含义</p>
 <table>
 <thead>
 <tr>
@@ -3556,9 +3560,13 @@
 <pre class="mermaid">flowchart LR
     A>text] --> B{text}-->C[/text\]-->D(((text)))</pre>
 
+<p>而当文字可能会破坏mermaid语法时，还需要使用兼容语法，即使用引号将文本圈起来：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">    id1[&quot;This is the (text) in the box&quot;]--&gt;A[&quot;A double quote:#quot;&quot;] --&gt; B[&quot;A dec char:#9829;&quot;]</span><br></pre></td></tr></table></figure></div>
 
+<pre class="mermaid">flowchart LR
+    id1["This is the (text) in the box"]-->A["A double quote:#quot;"] --> B["A dec char:#9829;"]</pre>
 
-<h2 id="三、连接样式"><a href="#三、连接样式" class="headerlink" title="三、连接样式"></a>三、连接样式</h2><h3 id="3-1-线条样式"><a href="#3-1-线条样式" class="headerlink" title="3.1 线条样式"></a>3.1 线条样式</h3><p>线条样式分为3种：实线、虚线和粗实线：</p>
+<h3 id="1-3-连接样式"><a href="#1-3-连接样式" class="headerlink" title="1.3 连接样式"></a>1.3 连接样式</h3><h4 id="1-3-1-线条样式"><a href="#1-3-1-线条样式" class="headerlink" title="1.3.1 线条样式"></a>1.3.1 线条样式</h4><p>线条样式分为3种：实线、虚线和粗实线：</p>
 <table>
 <thead>
 <tr>
@@ -3585,7 +3593,7 @@
 <pre class="mermaid">flowchart LR
     A---B-.-C===D</pre>
 
-<h3 id="3-2-箭头样式"><a href="#3-2-箭头样式" class="headerlink" title="3.2 箭头样式"></a>3.2 箭头样式</h3><p>箭头样式有4种：箭头、无箭头、圆形和x形</p>
+<h4 id="1-3-2-箭头样式"><a href="#1-3-2-箭头样式" class="headerlink" title="1.3.2 箭头样式"></a>1.3.2 箭头样式</h4><p>箭头样式有4种：箭头、无箭头、圆形和x形</p>
 <table>
 <thead>
 <tr>
@@ -3631,7 +3639,7 @@
 <pre class="mermaid">flowchart LR
     A-->B---C--oD(text)x--xE</pre>
 
-<h3 id="3-3-线条长度"><a href="#3-3-线条长度" class="headerlink" title="3.3 线条长度"></a>3.3 线条长度</h3><p>添加符号数量来增加连接线长度，实线增加<code>-</code>，虚线增加<code>.</code>，粗实线增加<code>=</code></p>
+<h4 id="1-3-3-线条长度"><a href="#1-3-3-线条长度" class="headerlink" title="1.3.3 线条长度"></a>1.3.3 线条长度</h4><p>添加符号数量来增加连接线长度，实线增加<code>-</code>，虚线增加<code>.</code>，粗实线增加<code>=</code></p>
 <table>
 <thead>
 <tr>
@@ -3684,7 +3692,7 @@
 <pre class="mermaid">flowchart LR
     A---B===>C<-...->D</pre>
 
-<h3 id="3-4-线条文字"><a href="#3-4-线条文字" class="headerlink" title="3.4 线条文字"></a>3.4 线条文字</h3><p>通常连接线上，还需要添加说明文字，按官方文档中有两种写法：</p>
+<h4 id="1-3-4-线条文字"><a href="#1-3-4-线条文字" class="headerlink" title="1.3.4 线条文字"></a>1.3.4 线条文字</h4><p>通常连接线上，还需要添加说明文字，按官方文档中有两种写法：</p>
 <ul>
 <li><code>A--&gt;|text|B</code></li>
 <li><code>A--text--&gt;B</code></li>
@@ -3696,7 +3704,39 @@
 <pre class="mermaid">flowchart LR
     A-.text.->B-.->|text|C</pre>
 
-]]></content>
+<h3 id="1-4-子图"><a href="#1-4-子图" class="headerlink" title="1.4 子图"></a>1.4 子图</h3><p>当流程图复杂到一定程度后，我们往往会用模块化的思想，将一些结点放在一个大结点中，使得流程图结构更清晰一些。这就是子图，使用<code>subgraph</code>来定义子图：</p>
+<p>子图之间、各个结点之间乃至子图和结点之间都可以用连接线连接</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">    subgraph A [one]</span><br><span class="line">    a1--&gt;a2</span><br><span class="line">    end</span><br><span class="line">    subgraph B [two]</span><br><span class="line">    b1--&gt;b2</span><br><span class="line">    end</span><br><span class="line">   	a2--&gt;b1</span><br></pre></td></tr></table></figure></div>
+
+<pre class="mermaid">flowchart LR
+    subgraph A [one]
+    a1-->a2
+    end
+    subgraph B [two]
+    b1-->b2
+    end
+       a2-->b1</pre>
+
+<h3 id="1-5-较冷门用法"><a href="#1-5-较冷门用法" class="headerlink" title="1.5 较冷门用法"></a>1.5 较冷门用法</h3><p>除了上面这些最基本的绘图语法外，流程图还支持markdown中的粗体、斜体语法，js回调方法以及css样式</p>
+<p>日常中应该很少会用到，就不一一记录了，如果以后真的使用到了再行补充</p>
+<h2 id="二、饼图"><a href="#二、饼图" class="headerlink" title="二、饼图"></a>二、饼图</h2><p>使用<code>pie</code>定义</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">pie title Pets adopted by volunteers</span><br><span class="line">    &quot;Dogs&quot; : 386</span><br><span class="line">    &quot;Cats&quot; : 85</span><br><span class="line">    &quot;Rats&quot; : 15</span><br></pre></td></tr></table></figure></div>
+
+<pre class="mermaid">pie title Pets adopted by volunteers
+    "Dogs" : 386
+    "Cats" : 85
+    "Rats" : 15</pre>
+
+<h2 id="三、时间轴图"><a href="#三、时间轴图" class="headerlink" title="三、时间轴图"></a>三、时间轴图</h2><p>使用<code>timeline</code>定义</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">timeline</span><br><span class="line">    title History of Social Media Platform</span><br><span class="line">    2002 : LinkedIn</span><br><span class="line">    2004 : Facebook</span><br><span class="line">         : Google</span><br><span class="line">    2005 : Youtube</span><br><span class="line">    2006 : Twitter</span><br></pre></td></tr></table></figure></div>
+
+<pre class="mermaid">timeline
+    title History of Social Media Platform
+    2002 : LinkedIn
+    2004 : Facebook
+         : Google
+    2005 : Youtube
+    2006 : Twitter</pre>]]></content>
       <categories>
         <category>工具</category>
       </categories>
