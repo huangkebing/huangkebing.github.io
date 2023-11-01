@@ -26,7 +26,7 @@
 <meta property="og:description" content="LCR(又名剑指offer2)系列算法题，第三部分——41至60题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-25T01:56:59.000Z">
-<meta property="article:modified_time" content="2023-10-25T02:15:13.771Z">
+<meta property="article:modified_time" content="2023-11-01T01:14:49.647Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="算法基础提升">
 <meta name="twitter:card" content="summary">
@@ -272,8 +272,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-25 10:15:13</span>
-            <span class="mobile">2023-10-25 10:15:13</span>
+            <span class="desktop">2023-11-01 09:14:49</span>
+            <span class="mobile">2023-11-01 09:14:49</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -311,12 +311,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>400 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.4k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fa-regular fa-clock"></i>&nbsp;<span>1 分钟</span>
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>6 分钟</span>
         </span>
     
     
@@ -351,6 +351,54 @@
 </div></div>
 
 <div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MovingAverage</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Deque&lt;Integer&gt; deque;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MovingAverage</span><span class="params">(<span class="type">int</span> size)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.size = size;</span><br><span class="line">        <span class="built_in">this</span>.deque = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;(size);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">next</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (deque.size() &gt;= size) &#123;</span><br><span class="line">            <span class="type">Integer</span> <span class="variable">remove</span> <span class="operator">=</span> deque.removeFirst();</span><br><span class="line">            sum -= remove;</span><br><span class="line">        &#125;</span><br><span class="line">        deque.add(val);</span><br><span class="line">        sum += val;</span><br><span class="line">        <span class="keyword">return</span> sum / deque.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="42、最近的请求次数"><a href="#42、最近的请求次数" class="headerlink" title="42、最近的请求次数"></a><font color="green">42、最近的请求次数</font></h2><p>写一个 <code>RecentCounter</code> 类来计算特定时间范围内最近的请求。</p>
+<p>请实现 <code>RecentCounter</code> 类：</p>
+<ul>
+<li><code>RecentCounter()</code> 初始化计数器，请求数为 0 。</li>
+<li><code>int ping(int t)</code> 在时间 <code>t</code> 添加一个新请求，其中 <code>t</code> 表示以毫秒为单位的某个时间，并返回过去 <code>3000</code> 毫秒内发生的所有请求数（包括新请求）。确切地说，返回在 <code>[t-3000, t]</code> 内发生的请求数。</li>
+</ul>
+<p><strong>保证</strong> 每次对 <code>ping</code> 的调用都使用比之前更大的 <code>t</code> 值。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">输入：</span><br><span class="line">inputs = [&quot;RecentCounter&quot;, &quot;ping&quot;, &quot;ping&quot;, &quot;ping&quot;, &quot;ping&quot;]</span><br><span class="line">inputs = [[], [1], [100], [3001], [3002]]</span><br><span class="line">输出：</span><br><span class="line">[null, 1, 2, 3, 3]</span><br><span class="line"></span><br><span class="line">解释：</span><br><span class="line">RecentCounter recentCounter = new RecentCounter();</span><br><span class="line">recentCounter.ping(1);     // requests = [1]，范围是 [-2999,1]，返回 1</span><br><span class="line">recentCounter.ping(100);   // requests = [1, 100]，范围是 [-2900,100]，返回 2</span><br><span class="line">recentCounter.ping(3001);  // requests = [1, 100, 3001]，范围是 [1,3001]，返回 3</span><br><span class="line">recentCounter.ping(3002);  // requests = [1, 100, 3001, 3002]，范围是 [2,3002]，返回 3</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= t &lt;= 10^9</code></li>
+<li>保证每次对 <code>ping</code> 调用所使用的 <code>t</code> 值都 <strong>严格递增</strong></li>
+<li>至多调用 <code>ping</code> 方法 <code>10^4</code> 次</li>
+</ul>
+<p>注意：本题与主站 933 题相同： <a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-recent-calls/" >https://leetcode-cn.com/problems/number-of-recent-calls/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<div class="note-large green"><div class="notel-title"><p>题解思路</p>
+</div><div class="notel-content"><p>因为每次给的t都是递增的，可以将t插入到队列尾部，并从队列首部开始移除小于t-3000的元素</p>
+<p>那么请求次数就是队列中元素的个数</p>
+</div></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RecentCounter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Deque&lt;Integer&gt; deque;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">RecentCounter</span><span class="params">()</span> &#123;</span><br><span class="line">        deque = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">ping</span><span class="params">(<span class="type">int</span> t)</span> &#123;</span><br><span class="line">        deque.offer(t);</span><br><span class="line">        <span class="keyword">while</span>(deque.peek() &lt; t - <span class="number">3000</span>)&#123;</span><br><span class="line">            deque.poll();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> deque.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="43、完全二叉树插入器"><a href="#43、完全二叉树插入器" class="headerlink" title="43、完全二叉树插入器"></a><font color="orange">43、完全二叉树插入器</font></h2><p>完全二叉树是每一层（除最后一层外）都是完全填充（即，节点数达到最大，第 <code>n</code> 层有 <code>2n-1</code> 个节点）的，并且所有的节点都尽可能地集中在左侧。</p>
+<p>设计一个用完全二叉树初始化的数据结构 <code>CBTInserter</code>，它支持以下几种操作：</p>
+<ul>
+<li><code>CBTInserter(TreeNode root)</code> 使用根节点为 <code>root</code> 的给定树初始化该数据结构；</li>
+<li><code>CBTInserter.insert(int v)</code> 向树中插入一个新节点，节点类型为 <code>TreeNode</code>，值为 <code>v</code> 。使树保持完全二叉树的状态，<strong>并返回插入的新节点的父节点的值</strong>；</li>
+<li><code>CBTInserter.get_root()</code> 将返回树的根节点。</li>
+</ul>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例 1：</span><br><span class="line">输入：inputs = [&quot;CBTInserter&quot;,&quot;insert&quot;,&quot;get_root&quot;], inputs = [[[1]],[2],[]]</span><br><span class="line">输出：[null,1,[1,2]]</span><br><span class="line"></span><br><span class="line">示例 2：</span><br><span class="line">输入：inputs = [&quot;CBTInserter&quot;,&quot;insert&quot;,&quot;insert&quot;,&quot;get_root&quot;], inputs = [[[1,2,3,4,5,6]],[7],[8],[]]</span><br><span class="line">输出：[null,3,4,[1,2,3,4,5,6,7,8]]</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>最初给定的树是完全二叉树，且包含 <code>1</code> 到 <code>1000</code> 个节点。</li>
+<li>每个测试用例最多调用 <code>CBTInserter.insert</code> 操作 <code>10000</code> 次。</li>
+<li>给定节点或插入节点的每个值都在 <code>0</code> 到 <code>5000</code> 之间。</li>
+</ul>
+<p>注意：本题与主站 919 题相同： <a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/complete-binary-tree-inserter/" >https://leetcode-cn.com/problems/complete-binary-tree-inserter/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<div class="note-large orange"><div class="notel-title"><p>题解思路</p>
+</div><div class="notel-content"><p>构建完全二叉树其实就是二叉树的广度遍历，那就要使用到队列：将子树不完全的结点放入队列，每次将新元素作为队首结点的左或右结点，并插入队列</p>
+<p>但是这里有个点是，初始化给的root结点，可以也有子结点，所以还需要将队列先做处理才能使用</p>
+</div></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CBTInserter</span> &#123;</span><br><span class="line"></span><br><span class="line">    Deque&lt;TreeNode&gt; deque = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    TreeNode root;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CBTInserter</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.root = root;</span><br><span class="line">        deque.offer(root);</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> deque.peek();</span><br><span class="line">            <span class="keyword">if</span>(node.left != <span class="literal">null</span> &amp;&amp; node.right != <span class="literal">null</span>)&#123;</span><br><span class="line">                <span class="comment">// 左右子树都有的结点，将左右结点入队列，并移除该结点</span></span><br><span class="line">                deque.pop();</span><br><span class="line">                deque.offer(node.left);</span><br><span class="line">                deque.offer(node.right);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(node.left != <span class="literal">null</span>)&#123;</span><br><span class="line">                <span class="comment">// 只有左子树，说明遍历到目标结点了，左结点入队列，并结束</span></span><br><span class="line">                deque.offer(node.left);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 都没有，也是一种目标结点</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> v)</span> &#123;</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> deque.peek();</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">insert</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeNode</span>(v);</span><br><span class="line">        <span class="keyword">if</span>(node.left == <span class="literal">null</span>)&#123;</span><br><span class="line">            node.left = insert;</span><br><span class="line">            deque.offer(insert);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            node.right = insert;</span><br><span class="line">            deque.offer(insert);</span><br><span class="line">            deque.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node.val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">get_root</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
         </div>
 
         
@@ -414,7 +462,7 @@
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
         <div class="page-title">LCR_Part.3</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#41%E3%80%81%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87%E5%80%BC"><span class="nav-text">41、数据流中的移动平均值</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#41%E3%80%81%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87%E5%80%BC"><span class="nav-text">41、数据流中的移动平均值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#42%E3%80%81%E6%9C%80%E8%BF%91%E7%9A%84%E8%AF%B7%E6%B1%82%E6%AC%A1%E6%95%B0"><span class="nav-text">42、最近的请求次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#43%E3%80%81%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E6%8F%92%E5%85%A5%E5%99%A8"><span class="nav-text">43、完全二叉树插入器</span></a></li></ol>
 
     </div>
 </div>
