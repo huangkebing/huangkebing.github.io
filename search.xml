@@ -511,6 +511,93 @@
 <div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">	<span class="attr">instance:</span></span><br><span class="line">	<span class="attr">client:</span></span><br><span class="line">	<span class="attr">server:</span></span><br><span class="line">	<span class="attr">dashboard:</span></span><br></pre></td></tr></table></figure></div>
 
 <p>具体可以参考：<a class="link"   href="https://blog.csdn.net/songjianlong/article/details/131315595" >Eureka配置文件详解-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="三、ribbon"><a href="#三、ribbon" class="headerlink" title="三、ribbon"></a>三、ribbon</h2><p>ribbon用作负载均衡，比如某个服务有3个实例，那么通过负载均衡可以将请求通过一定的策略分布到3个实例上。</p>
+<p>负载均衡分为服务端和客户端：</p>
+<pre class="mermaid">---
+title: 客户端负载均衡
+---
+flowchart LR
+    C1(["调用方(ribbon)"])
+    E[eureka]
+    subgraph S[服务方]
+        S1[服务方1]
+        S2[服务方2]
+        S3[服务方3]
+    end
+    C1-->|1.访问|E
+    E-->|2.返回服务列表|C1
+    C1-->|3.负载策略选择一个服务|S</pre>
+
+<pre class="mermaid">---
+title: 服务端负载均衡
+---
+flowchart LR
+    C1(["调用方1"])
+    C2(["调用方2"])
+    C3(["调用方3"])
+    N[nginx]
+    S1[服务方1]
+    S2[服务方2]
+    S3[服务方3]
+    C1 & C2 & C3 --> N
+    N --> S1 & S2 & S3</pre>
+
+<p>其中ribbon就是客户端负载均衡，即由调用方处理负载均衡</p>
+<p>优点是快速上手、成本较小，且相比于服务端统一的负载均衡也更灵活</p>
+<p>缺点也很明显业务和负载这些运维属性都在程序中，不容易管理</p>
+<h3 id="3-1-使用"><a href="#3-1-使用" class="headerlink" title="3.1 使用"></a>3.1 使用</h3><p>eureka-client包中已经包含了ribbon，因此如果使用了eureka就无需再导入jar包</p>
+<p>这里使用<code>RestTemplate</code>来发起请求，只需要使用<code>@LoadBalanced</code>注解即可开启负载均衡</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RestConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@LoadBalanced</span></span><br><span class="line">    <span class="keyword">public</span> RestTemplate <span class="title function_">restTemplate</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RestTemplate</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="3-2-负载策略和配置"><a href="#3-2-负载策略和配置" class="headerlink" title="3.2 负载策略和配置"></a>3.2 负载策略和配置</h3><div class="highlight-container" data-rel="Yml"><figure class="iseeu highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">springcloud-nacos-provider:</span> <span class="comment"># nacos中的服务id</span></span><br><span class="line">  <span class="attr">ribbon:</span></span><br><span class="line">    <span class="attr">NFLoadBalancerRuleClassName:</span> <span class="string">com.netflix.loadbalancer.RoundRobinRule</span> <span class="comment">#设置负载均衡</span></span><br></pre></td></tr></table></figure></div>
+
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>说明</th>
+<th>配置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>轮询策略</td>
+<td>按照一定的顺序依次调用服务实例，如实例1、2、3</td>
+<td><code>com.netflix.loadbalancer.RoundRobinRule</code></td>
+</tr>
+<tr>
+<td>权重策略</td>
+<td>根据每个服务提供者的响应时间分配一个权重，响应时间越长，权重越小，被选中的可能性也就越低</td>
+<td><code>com.netflix.loadbalancer.WeightedResponseTimeRule</code></td>
+</tr>
+<tr>
+<td>随机策略</td>
+<td>从服务提供者的列表中随机选择一个服务实例</td>
+<td><code>com.netflix.loadbalancer.RandomRule</code></td>
+</tr>
+<tr>
+<td>最小连接数策略</td>
+<td>选取连接数最小的⼀个服务实例。如果有相同的最小连接数，那么会调用轮询策略进行选取</td>
+<td><code>com.netflix.loadbalancer.BestAvailableRule</code></td>
+</tr>
+<tr>
+<td>重试策略</td>
+<td>按照轮询策略来获取服务，如果获取的服务实例为 null 或已经失效，则在指定的时间之内不断地进行重试来获取服务，如果超过指定时间依然没获取到服务实例则返回 null</td>
+<td><code>com.netflix.loadbalancer.RetryRule</code></td>
+</tr>
+<tr>
+<td>可用性敏感策略</td>
+<td>先过滤掉非健康的服务实例，然后再选择连接数较小的服务实例</td>
+<td><code>com.netflix.loadbalancer.AvailabilityFilteringRule</code></td>
+</tr>
+<tr>
+<td>区域敏感策略</td>
+<td>根据服务所在区域(zone)的性能和服务的可用性来选择服务实例，在没有区域的环境下，该策略和轮询策略类似</td>
+<td><code>com.netflix.loadbalancer.ZoneAvoidanceRule</code></td>
+</tr>
+</tbody></table>
+<p>其中重试策略需要额外配置超时时间：</p>
+<div class="highlight-container" data-rel="Yml"><figure class="iseeu highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">ribbon:</span></span><br><span class="line">  <span class="attr">ConnectTimeout:</span> <span class="number">2000</span> <span class="comment"># 请求连接的超时时间</span></span><br><span class="line">  <span class="attr">ReadTimeout:</span> <span class="number">5000</span> <span class="comment"># 请求处理的超时时间</span></span><br></pre></td></tr></table></figure></div>
+
 ]]></content>
       <categories>
         <category>框架学习</category>
