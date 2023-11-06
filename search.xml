@@ -472,8 +472,7 @@
 <p>Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。</p>
 <p>也就是说，这些子模块其实就是将优秀的开源框架结构Spring Boot形成的，这些子模块功能各异，并不是说要全部都用上</p>
 <p>了解到这么多模块中Spring Cloud Netflix是最常见的一套，因此先从这个模块入手</p>
-<h2 id="二、Spring-Cloud-Netflix"><a href="#二、Spring-Cloud-Netflix" class="headerlink" title="二、Spring Cloud Netflix"></a>二、Spring Cloud Netflix</h2><p>工程代码：<a class="link"   href="https://github.com/huangkebing/spring_cloud_netflix_learn" >spring_cloud_netflix_learn(github.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>官方文档中描述到：</p>
+<h3 id="1-2-什么是Spring-Cloud-Netflix"><a href="#1-2-什么是Spring-Cloud-Netflix" class="headerlink" title="1.2 什么是Spring Cloud Netflix"></a>1.2 什么是Spring Cloud Netflix</h3><p>官方文档中描述到：</p>
 <p>该项目通过自动配置和绑定到Spring环境和其他Spring编程模型习惯用法，为Spring Boot应用程序提供Netflix的OSS集成。通过一些简单的注释，您可以快速启用和配置应用程序中的常见模式，并使用久经考验的Netflix组件构建大型分布式系统。</p>
 <p>在博客<a class="link"   href="https://blog.csdn.net/qq_44112474/article/details/109050543" >5.Spring Cloud快速入门-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中了解到：</p>
 <p>Netflix：微服务大规模的应用，在技术上毫无保留的把一整套微服务架构核心技术栈开源了出来，叫做Netflix OSS</p>
@@ -489,13 +488,29 @@
 <li><p>Hystix：熔断器</p>
 </li>
 </ul>
-<h3 id="2-1-Eureka"><a href="#2-1-Eureka" class="headerlink" title="2.1 Eureka"></a>2.1 Eureka</h3><p>Eureka是一个注册中心，但注册中心有什么用，暂时还没有体会到，后续补充</p>
-<p>Eureka使用起来很简单，只需要导入一个jar包：</p>
+<p>工程代码：<a class="link"   href="https://github.com/huangkebing/spring_cloud_netflix_learn" >spring_cloud_netflix_learn(github.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="二、eureka"><a href="#二、eureka" class="headerlink" title="二、eureka"></a>二、eureka</h2><p>eureka是一个注册中心，但注册中心有什么用，暂时还没有体会到，后续补充</p>
+<p>eureka分为server和client，server就是记录注册信息的地方，而client就是注册者</p>
+<h3 id="2-1-server"><a href="#2-1-server" class="headerlink" title="2.1 server"></a>2.1 server</h3><p>server使用起来很简单，只需要导入一个jar包：</p>
 <div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
 <p>然后在Application.Java中添加注解<code>@EnableEurekaServer</code></p>
-<p>使用的重点在配置文件上，通过application.yml配置</p>
-<p>后续补充</p>
+<h3 id="2-2-client"><a href="#2-2-client" class="headerlink" title="2.2 client"></a>2.2 client</h3><p>client同样简单，也只需要一个jar包</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>在client中随便写一个简单接口用作模拟服务提供者，在云服务器和本地分别启动一个实例来模拟集群，再去eureka控制台查看：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/eureka-client.jpg"
+                      alt="eureka-client"
+                ></p>
+<p>可以看到服务已经注册到了eureka中，且有启动的两个实例</p>
+<h3 id="2-3-配置"><a href="#2-3-配置" class="headerlink" title="2.3 配置"></a>2.3 配置</h3><p>eureka使用的重点在配置文件上，Spring Cloud Eureka为分布式系统外部化配置提供了服务器端和客户端的支持，它包括Eureka Server和Eureka Client两部分，因此Spring Cloud Eureka 配置项比较多。</p>
+<p>通过application.yml配置，分为四大部分配置，但通常很多配置使用默认配置即可：</p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">	<span class="attr">instance:</span></span><br><span class="line">	<span class="attr">client:</span></span><br><span class="line">	<span class="attr">server:</span></span><br><span class="line">	<span class="attr">dashboard:</span></span><br></pre></td></tr></table></figure></div>
+
+<p>具体可以参考：<a class="link"   href="https://blog.csdn.net/songjianlong/article/details/131315595" >Eureka配置文件详解-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 ]]></content>
       <categories>
         <category>框架学习</category>
