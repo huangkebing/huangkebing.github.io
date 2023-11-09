@@ -477,19 +477,17 @@
 <p>在博客<a class="link"   href="https://blog.csdn.net/qq_44112474/article/details/109050543" >5.Spring Cloud快速入门-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中了解到：</p>
 <p>Netflix：微服务大规模的应用，在技术上毫无保留的把一整套微服务架构核心技术栈开源了出来，叫做Netflix OSS</p>
 <ul>
-<li><p>Eureka：注册中心</p>
-</li>
-<li><p>Zuul：服务网关</p>
-</li>
-<li><p>Ribbon：负载均衡</p>
-</li>
-<li><p>Feign：服务调用</p>
-</li>
-<li><p>Hystix：熔断器</p>
-</li>
+<li>Eureka：注册中心</li>
+<li>Zuul：服务网关</li>
+<li>Ribbon：负载均衡</li>
+<li>Feign：服务调用</li>
+<li>Hystix：熔断</li>
 </ul>
-<p>工程代码：<a class="link"   href="https://github.com/huangkebing/spring_cloud_netflix_learn" >spring_cloud_netflix_learn(github.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h2 id="二、eureka"><a href="#二、eureka" class="headerlink" title="二、eureka"></a>二、eureka</h2><p>eureka是一个注册中心，但注册中心有什么用，暂时还没有体会到，后续补充</p>
+<h3 id="1-3-踩坑了"><a href="#1-3-踩坑了" class="headerlink" title="1.3 踩坑了"></a>1.3 踩坑了</h3><p>最初的想法是通过官方文档来学习，但因为不了解cloud的结构和设计，看起来觉得很乱很吃力，然后就想着通过一些博客来先入门，结果第一步就踩到坑了。</p>
+<p>就是文章的时效性，加上很多转载文</p>
+<p>当feign开启熔断器时，博客上统一都是<code>feign.hystix.enabled=true</code>，结果开启后并没有用</p>
+<p>查了才知道Spring Cloud2020后feign的jar中移除了hystix，需要额外引入，且开启配置也有变化</p>
+<h2 id="二、eureka"><a href="#二、eureka" class="headerlink" title="二、eureka"></a>二、eureka</h2><p>eureka是一个注册中心，基于心跳机制动态维护一个可用服务列表，比如一个查询服务有哪些实例可用他的ip、端口是多少</p>
 <p>eureka分为server和client，server就是记录注册信息的地方，而client就是注册者</p>
 <h3 id="2-1-server"><a href="#2-1-server" class="headerlink" title="2.1 server"></a>2.1 server</h3><p>server使用起来很简单，只需要导入一个jar包：</p>
 <div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
@@ -542,10 +540,10 @@ flowchart LR
     C1 & C2 & C3 --> N
     N --> S1 & S2 & S3</pre>
 
-<p>其中ribbon就是客户端负载均衡，即由调用方处理负载均衡</p>
+<p>其中ribbon就是客户端负载均衡，即由调用方处理负载均衡(和nginx的区别：<a class="link"   href="https://www.jianshu.com/p/49b3a22dbec9" >Ribbon与Nginx的区别 - 简书 (jianshu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
 <p>优点是快速上手、成本较小，且相比于服务端统一的负载均衡也更灵活</p>
 <p>缺点也很明显业务和负载这些运维属性都在程序中，不容易管理</p>
-<h3 id="3-1-使用"><a href="#3-1-使用" class="headerlink" title="3.1 使用"></a>3.1 使用</h3><p>eureka-client包中已经包含了ribbon，因此如果使用了eureka就无需再导入jar包</p>
+<h3 id="3-1-使用ribbon"><a href="#3-1-使用ribbon" class="headerlink" title="3.1 使用ribbon"></a>3.1 使用ribbon</h3><p>eureka-client包中已经包含了ribbon，因此如果使用了eureka就无需再导入jar包</p>
 <p>这里使用<code>RestTemplate</code>来发起请求，只需要使用<code>@LoadBalanced</code>注解即可开启负载均衡</p>
 <div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RestConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@LoadBalanced</span></span><br><span class="line">    <span class="keyword">public</span> RestTemplate <span class="title function_">restTemplate</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RestTemplate</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
@@ -598,6 +596,25 @@ flowchart LR
 <p>其中重试策略需要额外配置超时时间：</p>
 <div class="highlight-container" data-rel="Yml"><figure class="iseeu highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">ribbon:</span></span><br><span class="line">  <span class="attr">ConnectTimeout:</span> <span class="number">2000</span> <span class="comment"># 请求连接的超时时间</span></span><br><span class="line">  <span class="attr">ReadTimeout:</span> <span class="number">5000</span> <span class="comment"># 请求处理的超时时间</span></span><br></pre></td></tr></table></figure></div>
 
+<h2 id="四、feign"><a href="#四、feign" class="headerlink" title="四、feign"></a>四、feign</h2><p>Feign是Netflix开发的声明式、模板化的HTTP客户端，其灵感来自Retrofit、JAXRS-2.0以及WebSocket。Feign可帮助我们更加快捷、优雅地调用HTTP API</p>
+<p>相比之前使用的restTemplate，其host、uri、param都是分开的，因此可读性更佳、也更容易维护</p>
+<h3 id="4-1-使用feign"><a href="#4-1-使用feign" class="headerlink" title="4.1 使用feign"></a>4.1 使用feign</h3><p>首先需要引入jar包</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>然后编写一个feignclient接口</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 此处name就是eureka中的服务名，也就相当于是ip：port</span></span><br><span class="line"><span class="meta">@FeignClient(name = &quot;user-provider&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">RecordFeignClient</span> &#123;</span><br><span class="line">    <span class="comment">// 此处是指服务方的uri，方法入参就是http请求的参数</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/record/&#123;rid&#125;&quot;)</span></span><br><span class="line">    Record <span class="title function_">getRecord</span><span class="params">(<span class="meta">@PathVariable(&quot;rid&quot;)</span> String rid)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>然后将controller中的restTemplate替换成定义的feignClient，最后还需要在启动类中加上<code>@EnableFeignClients</code>注解</p>
+<p>启动程序验证，调用正常，还集成了ribbon负载均衡</p>
+<h3 id="4-2-配置"><a href="#4-2-配置" class="headerlink" title="4.2 配置"></a>4.2 配置</h3><p>feign的配置和其他配置类似，有Java Bean和yml配置文件两种形式。因为只是了解一下，并不是要使用feign，就不过多去看配置了</p>
+<p>具体可以看：<a class="link"   href="https://blog.csdn.net/qi341500/article/details/129300783" >SpringCloud：Feign的使用及配置_feignclient配置_Poetry-Distance的博客-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="五、Hystrix"><a href="#五、Hystrix" class="headerlink" title="五、Hystrix"></a>五、Hystrix</h2><p>Hystrix是一个实现了超时机制和断路器模式的工具类库，用于隔离访问远程系统、服务或者第三方库，防止级联失败，从而提升系统的可用性与容错性</p>
+<p>也就是针对服务调用的一个断路器，当依赖服务出现问题时，切断链路减少本服务受到的影响。可以结合feign使用，也可以单独使用</p>
+<p>结合feign使用或者单独使用都很简单，具体使用可以参考：<a class="link"   href="https://blog.csdn.net/qq_44112474/article/details/109094254" >Hystrix入门实战(完整版)_hystrix教程-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>注意新版本和文中有些出入</p>
+<h2 id="六、Zuul"><a href="#六、Zuul" class="headerlink" title="六、Zuul"></a>六、Zuul</h2><p><a class="link"   href="https://blog.csdn.net/qq_44112474/article/details/109094775" >Zuul入门实战(完整版)-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="七、感受"><a href="#七、感受" class="headerlink" title="七、感受"></a>七、感受</h2><p>Spring Cloud Netflix算是一套比较完整的微服务框架，搭建也很快、成本很低，适合小型企业快速启动</p>
+<p>至于性能上，没有能够验证的环境与流量，无法验证他和其他框架的差别，但至少使用上来说还算便捷</p>
 ]]></content>
       <categories>
         <category>框架学习</category>
@@ -1476,11 +1493,17 @@ flowchart LR
     <title>优秀博文收藏</title>
     <url>/2023/10/20/blogs/</url>
     <content><![CDATA[<h1 id="好文收集"><a href="#好文收集" class="headerlink" title="好文收集"></a>好文收集</h1><h2 id="博客搭建文档"><a href="#博客搭建文档" class="headerlink" title="博客搭建文档"></a>博客搭建文档</h2><ol>
-<li><a class="link"   href="https://hexo.io/zh-cn/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
-<li><a class="link"   href="https://redefine-docs.ohevan.com/getting-started" >redefine主题 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
-<li><a class="link"   href="https://mermaid.js.org/intro/" >mermaid流程图 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   href="https://hexo.io/zh-cn/" >Hexo文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   href="https://redefine-docs.ohevan.com/getting-started" >redefine主题文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   href="https://mermaid.js.org/intro/" >mermaid文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 </ol>
-<h2 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h2><p><a class="link"   href="https://blog.csdn.net/qq_44112474/article/details/109047883" >SpringCloud入门(总体认识) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="Spring-Framework"><a href="#Spring-Framework" class="headerlink" title="Spring Framework"></a>Spring Framework</h2><ol>
+<li><a class="link"   href="https://springdoc.cn/spring/" >Spring Framework 中文文档 (springdoc.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   href="https://blog.csdn.net/m0_37959155/article/details/126273608" >spring源码环境5.2.x搭建(截图详细，踩坑多)_座上客的博客-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ol>
+<h2 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h2><ol>
+<li><a class="link"   href="https://www.wenjiangs.com/docs/spring-cloud" >Spring Cloud 中文文档(wenjiangs.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ol>
 ]]></content>
   </entry>
   <entry>
