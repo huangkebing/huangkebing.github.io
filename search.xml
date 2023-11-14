@@ -1490,12 +1490,16 @@ flowchart LR
       </tags>
   </entry>
   <entry>
-    <title>优秀博文收藏</title>
+    <title>文章链接</title>
     <url>/2023/10/20/blogs/</url>
-    <content><![CDATA[<h1 id="好文收集"><a href="#好文收集" class="headerlink" title="好文收集"></a>好文收集</h1><h2 id="博客搭建文档"><a href="#博客搭建文档" class="headerlink" title="博客搭建文档"></a>博客搭建文档</h2><ol>
+    <content><![CDATA[<h2 id="博客搭建文档"><a href="#博客搭建文档" class="headerlink" title="博客搭建文档"></a>博客搭建文档</h2><ol>
 <li><a class="link"   href="https://hexo.io/zh-cn/" >Hexo文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 <li><a class="link"   href="https://redefine-docs.ohevan.com/getting-started" >redefine主题文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 <li><a class="link"   href="https://mermaid.js.org/intro/" >mermaid文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ol>
+<h2 id="博客站"><a href="#博客站" class="headerlink" title="博客站"></a>博客站</h2><ol>
+<li><a class="link"   href="https://bugstack.cn/" >小傅哥 bugstack 虫洞栈 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   href="https://www.pdai.tech/" >Java 全栈知识体系 (pdai.tech) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 </ol>
 <h2 id="Spring-Framework"><a href="#Spring-Framework" class="headerlink" title="Spring Framework"></a>Spring Framework</h2><ol>
 <li><a class="link"   href="https://springdoc.cn/spring/" >Spring Framework 中文文档 (springdoc.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
