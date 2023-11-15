@@ -645,7 +645,8 @@ flowchart LR
 </blockquote>
 ]]></content>
       <categories>
-        <category>JDK源码笔记</category>
+        <category>Java</category>
+        <category>集合</category>
       </categories>
   </entry>
   <entry>
@@ -1283,7 +1284,8 @@ flowchart LR
 <h2 id="三、AbstractList方法解读"><a href="#三、AbstractList方法解读" class="headerlink" title="三、AbstractList方法解读"></a>三、AbstractList方法解读</h2><p>和AbstractCollection类似，先略过</p>
 ]]></content>
       <categories>
-        <category>JDK源码笔记</category>
+        <category>Java</category>
+        <category>集合</category>
       </categories>
   </entry>
   <entry>
@@ -1444,7 +1446,8 @@ flowchart LR
 <p>:::</p>
 ]]></content>
       <categories>
-        <category>JDK源码笔记</category>
+        <category>Java</category>
+        <category>集合</category>
       </categories>
   </entry>
   <entry>
