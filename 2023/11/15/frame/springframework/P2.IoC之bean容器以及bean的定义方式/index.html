@@ -13,18 +13,20 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/categories/"/>
+    <link rel="canonical" href="http://example.com/2023/11/15/frame/springframework/p2.ioc之bean容器以及bean的定义方式/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://example.com/categories/index.html">
+        <meta name="description" content="spring核心特性ioc源码探究——bean的容器以及bean的定义方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章、IoC之bean容器以及bean的定义方式">
+<meta property="og:url" content="http://example.com/2023/11/15/frame/springframework/P2.IoC%E4%B9%8Bbean%E5%AE%B9%E5%99%A8%E4%BB%A5%E5%8F%8Abean%E7%9A%84%E5%AE%9A%E4%B9%89%E6%96%B9%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="spring核心特性ioc源码探究——bean的容器以及bean的定义方式">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-20T10:01:05.000Z">
-<meta property="article:modified_time" content="2023-10-20T10:01:05.128Z">
+<meta property="article:published_time" content="2023-11-15T02:04:47.000Z">
+<meta property="article:modified_time" content="2023-11-20T07:36:48.140Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
     
@@ -38,7 +40,7 @@
     
     <title>
         
-            分类 -
+            第二章、IoC之bean容器以及bean的定义方式 -
         
         program-inn
     </title>
@@ -153,7 +155,7 @@
                         
                             <li class="navbar-item">
                                 <!-- Menu -->
-                                <a class="active" 
+                                <a class="" 
                                     href="/categories"  >
                                     
                                         
@@ -222,7 +224,7 @@
             
                 
                     <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
-                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group active" 
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
                         href="/categories"  >
                              
                                 
@@ -268,19 +270,178 @@
             <div class="main-content">
 
                 
-                    <div class="category-list-container">
-	<div >
-		<h1 class="category-header">
-			分类
-		</h1>
-	</div>
-	<div class="category-list-content">
-		<ul class="all-category-list"><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Java/">Java</a><span class="all-category-list-count">5</span><ul class="all-category-list-child"><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Java/IO/">IO</a><span class="all-category-list-count">1</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Java/%E9%9B%86%E5%90%88/">集合</a><span class="all-category-list-count">4</span></li></ul></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/spring/">spring</a><span class="all-category-list-count">4</span><ul class="all-category-list-child"><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/spring/spring-cloud/">spring cloud</a><span class="all-category-list-count">1</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/spring/spring-framework/">spring framework</a><span class="all-category-list-count">3</span></li></ul></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="all-category-list-count">2</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="all-category-list-count">9</span><ul class="all-category-list-child"><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">专项突破</a><span class="all-category-list-count">2</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%89%91%E6%8C%87offer/">剑指offer</a><span class="all-category-list-count">4</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%89%91%E6%8C%87offer%E2%85%A1/">剑指offerⅡ</a><span class="all-category-list-count">3</span></li></ul></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="all-category-list-count">2</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="all-category-list-count">3</span></li></ul>
-	</div>
-	<div class="category-comments">
-		
-	</div>
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">第二章、IoC之bean容器以及bean的定义方式</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header flex flex-row gap-2 items-center">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/avatar.png">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">huangkebing</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-11-15 10:04:47</span>
+        <span class="mobile">2023-11-15 10:04:47</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-11-20 15:36:48</span>
+            <span class="mobile">2023-11-20 15:36:48</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/spring/">spring</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/spring/spring-framework/">spring framework</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>589 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>2 分钟</span>
+        </span>
+    
+    
 </div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <p>关于IoC，这个概念是很熟悉了，即将对象的创建、依赖关系的管理和对象的生命周期的控制从应用程序代码中分离出来，交给Spring容器来完成。</p>
+<p>最普遍的使用，比如我们创建了一个类，并在类A上加上<code>@Component</code>注解，然后就可以在B类中通过<code>@AutoWired</code>注入使用，也就是说A类就交给了Spring容器来管理了，即称为了一个bean</p>
+<h2 id="一、bean容器"><a href="#一、bean容器" class="headerlink" title="一、bean容器"></a>一、bean容器</h2><div class="note success"><p>简单尝试：既然spring替我们管理bean，那么bean是保存在什么数据结构中的呢？</p>
+</div>
+
+<p>我们知道可以通过beanName来获取bean，那就有点类似是k-v键值对，所以可以先推测spring是使用map来存储bean的，至于是哪个map就需要从源码中找了</p>
+<p>因为有了源码运行环境，找这个就很容易了！</p>
+<p>首先，编写一个简单测试，通过ApplicationContext来获取bean。因为这里为了方便，注册bean不是用xml配置，而是用<code>@Bean</code>来做的，所以需要使用<code>AnnotationConfigApplicationContext</code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(UserConfig.class);</span><br><span class="line">		<span class="comment">// 此处打断点，进行单步调试</span></span><br><span class="line">      <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User) context.getBean(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">		System.out.println(user);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>在注释处打断点，进行单步调试</p>
+<p>最终在<code>DefaultSingletonBeanRegistry</code>的<code>getSingleton(String, boolean)</code>方法中取到了bean，也见到了bean存放的地方：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Cache of singleton objects: bean name to bean instance. */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; singletonObjects = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;(<span class="number">256</span>);</span><br></pre></td></tr></table></figure></div>
+
+<p>在知道了bean容器是<code>ConcurrentHashMap</code>之外，还发现不管是类名、方法名还是变量名都有<code>singleton</code>，这很自然可以联想到<code>@Scope</code>作用域注解，可能不同作用域的bean存放在不同的地方，这一点后续再验证</p>
+<h2 id="二、bean的定义"><a href="#二、bean的定义" class="headerlink" title="二、bean的定义"></a>二、bean的定义</h2><p>在spring最初的版本，只有通过xml来定义bean一种方法，而发展至今定义方式越来越多，但整体是从xml逐渐往注解过渡。</p>
+<p>关于spring注解的发展可以看：<a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/7277799132110569533" >Spring注解编程的发展过程 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>关于bean的定义方式，这里先贴一篇别人的文章占下位置，因为这一块不是很重要，常用的就那么几种，<a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/6981815953784995847" >面试官：spring中定义bean的方法有哪些? 我一口气说出了12种，把面试官彻底征服了。 - 掘金 (juejin.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/11/20/frame/springframework/P3.IoC%E4%B9%8Bbean%E7%9A%84%E6%B3%A8%E5%86%8C/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">第三章、IoC之bean的注册</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/11/14/frame/springframework/P1.%E5%89%8D%E8%A8%80&amp;%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">第一章、spring framework源码环境&amp;总体认知</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">第二章、IoC之bean容器以及bean的定义方式</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81bean%E5%AE%B9%E5%99%A8"><span class="nav-text">一、bean容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81bean%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">二、bean的定义</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
 
 
                 
@@ -338,6 +499,23 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-side-tools-container">

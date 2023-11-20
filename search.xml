@@ -3889,7 +3889,7 @@ flowchart LR
       </categories>
   </entry>
   <entry>
-    <title>第一章、spring framework源码环境</title>
+    <title>第一章、spring framework源码环境&amp;总体认知</title>
     <url>/2023/11/14/frame/springframework/P1.%E5%89%8D%E8%A8%80&amp;%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>又要开新坑了，虽然前面很多坑都太监了。。其实也不是说想太监而是实在是深入不下去。比如设计模式，两种设计模式在我看来看不出区别但却是两种模式，完全无法理解其中的设计。刷题这块，目前刷了百题，hard级别的依旧很难解，唯一有进步的就是medium级别有了一些思路，但如果继续刷下去感觉也没啥提升了。</p>
 <p>然后最近也是越来越焦虑、迷茫，毕业到现在工作了两年多，工作内容就是基于spring做业务堆砌，感觉一直没有接触到真正的编程，虽然我也想不清楚什么是真正的编程。。反正现在单纯的写业务对个人能力几乎没有提升了，然后尝试各个方向深入学习基本都是铩羽而归，收获甚微，导致越来越焦虑。</p>
@@ -3899,7 +3899,7 @@ flowchart LR
 <li>最开始尝试了官方文档，但是我英语不是很好，而且对spring很多概念都不了解，所以压根看不懂，失败告终</li>
 <li>然后找到了一篇中文文档，翻译的很好，无奈还是看不懂</li>
 <li>然后尝试从源码入手，搭建了源码环境，成功运行了，但是源码太多了，光是获得ApplicationContext就有很多种方式，完全不知道从哪里下手</li>
-<li>最后找到了一个博客网站<a class="link"   href="https://bugstack.cn/" >小傅哥 bugstack 虫洞栈 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，里面有比较详细的spring源码解析，所以就先跟着博客走</li>
+<li>最后找到了一个博客网站<a class="link"   href="https://bugstack.cn/" >小傅哥 bugstack 虫洞栈 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，里面有比较详细的spring源码解析，所以就先跟着博客走(当然不是就只看博客的内容，基于的内容还是源码，只是把博客当作一个顺序)</li>
 </ul>
 <p>挣扎了这么久说明我现在还不具备通过源码、官方文档自主学习的能力，只能在先去学习别人的学习成果。不过也情有可原，毕竟spring算是目前流行的最庞大的框架了吧。但是也要注意培养自己的这种能力。</p>
 <h2 id="源码环境搭建"><a href="#源码环境搭建" class="headerlink" title="源码环境搭建"></a>源码环境搭建</h2><p>从github上拉取源码：</p>
@@ -3913,6 +3913,42 @@ flowchart LR
 <p>到这一步后，创建了测试module，编写简单测试代码，启动成功了。这里有一个坑：就是module的gradle配置文件命名必须是{module_name}.gradle</p>
 <p>至于上文中提到的AspectJ问题，还没有使用到，暂且先不管</p>
 <p>至此环境已经搭建完成，开始漫长的spring学习~</p>
+]]></content>
+      <categories>
+        <category>spring</category>
+        <category>spring framework</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>第三章、IoC之bean的注册</title>
+    <url>/2023/11/20/frame/springframework/P3.IoC%E4%B9%8Bbean%E7%9A%84%E6%B3%A8%E5%86%8C/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>spring</category>
+        <category>spring framework</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>第二章、IoC之bean容器以及bean的定义方式</title>
+    <url>/2023/11/15/frame/springframework/P2.IoC%E4%B9%8Bbean%E5%AE%B9%E5%99%A8%E4%BB%A5%E5%8F%8Abean%E7%9A%84%E5%AE%9A%E4%B9%89%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>关于IoC，这个概念是很熟悉了，即将对象的创建、依赖关系的管理和对象的生命周期的控制从应用程序代码中分离出来，交给Spring容器来完成。</p>
+<p>最普遍的使用，比如我们创建了一个类，并在类A上加上<code>@Component</code>注解，然后就可以在B类中通过<code>@AutoWired</code>注入使用，也就是说A类就交给了Spring容器来管理了，即称为了一个bean</p>
+<h2 id="一、bean容器"><a href="#一、bean容器" class="headerlink" title="一、bean容器"></a>一、bean容器</h2><div class="note success"><p>简单尝试：既然spring替我们管理bean，那么bean是保存在什么数据结构中的呢？</p>
+</div>
+
+<p>我们知道可以通过beanName来获取bean，那就有点类似是k-v键值对，所以可以先推测spring是使用map来存储bean的，至于是哪个map就需要从源码中找了</p>
+<p>因为有了源码运行环境，找这个就很容易了！</p>
+<p>首先，编写一个简单测试，通过ApplicationContext来获取bean。因为这里为了方便，注册bean不是用xml配置，而是用<code>@Bean</code>来做的，所以需要使用<code>AnnotationConfigApplicationContext</code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(UserConfig.class);</span><br><span class="line">		<span class="comment">// 此处打断点，进行单步调试</span></span><br><span class="line">      <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User) context.getBean(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">		System.out.println(user);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>在注释处打断点，进行单步调试</p>
+<p>最终在<code>DefaultSingletonBeanRegistry</code>的<code>getSingleton(String, boolean)</code>方法中取到了bean，也见到了bean存放的地方：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** Cache of singleton objects: bean name to bean instance. */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; singletonObjects = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;(<span class="number">256</span>);</span><br></pre></td></tr></table></figure></div>
+
+<p>在知道了bean容器是<code>ConcurrentHashMap</code>之外，还发现不管是类名、方法名还是变量名都有<code>singleton</code>，这很自然可以联想到<code>@Scope</code>作用域注解，可能不同作用域的bean存放在不同的地方，这一点后续再验证</p>
+<h2 id="二、bean的定义"><a href="#二、bean的定义" class="headerlink" title="二、bean的定义"></a>二、bean的定义</h2><p>在spring最初的版本，只有通过xml来定义bean一种方法，而发展至今定义方式越来越多，但整体是从xml逐渐往注解过渡。</p>
+<p>关于spring注解的发展可以看：<a class="link"   href="https://juejin.cn/post/7277799132110569533" >Spring注解编程的发展过程 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>关于bean的定义方式，这里先贴一篇别人的文章占下位置，因为这一块不是很重要，常用的就那么几种，<a class="link"   href="https://juejin.cn/post/6981815953784995847" >面试官：spring中定义bean的方法有哪些? 我一口气说出了12种，把面试官彻底征服了。 - 掘金 (juejin.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 ]]></content>
       <categories>
         <category>spring</category>
