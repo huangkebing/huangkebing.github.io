@@ -3609,6 +3609,7 @@ flowchart LR
     <url>/2023/10/25/util/mermaid/</url>
     <content><![CDATA[<p>官方文档：<a class="link"   href="https://mermaid.js.org/intro/" >About Mermaid | Mermaid <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p>mermaid中提供了10+种图形，但一些图形用的比较少。另外奇怪的是，为什么没有提供柱状图和折线图</p>
+<p>使用过程中typora经常会报错，但是在idea中又能正常渲染，感觉是版本兼容问题，解决方案：<a class="link"   href="https://www.cnblogs.com/learn-gz/p/17566881.html" >typora不支持mermaid 问题记录 - 是秃子总会发光- 博客园 (cnblogs.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <h2 id="一、流程图"><a href="#一、流程图" class="headerlink" title="一、流程图"></a>一、流程图</h2><p>流程图使用非常多，当一些逻辑比较复杂时，用一堆文字去描述的效果往往不如一张流程图</p>
 <p>使用<code>flowchart</code>来定义流程图</p>
 <h3 id="1-1-绘图方向"><a href="#1-1-绘图方向" class="headerlink" title="1.1 绘图方向"></a>1.1 绘图方向</h3><table>
@@ -3915,6 +3916,9 @@ flowchart LR
 <p>到这一步后，创建了测试module，编写简单测试代码，启动成功了。这里有一个坑：就是module的gradle配置文件命名必须是{module_name}.gradle</p>
 <p>至于上文中提到的AspectJ问题，还没有使用到，暂且先不管</p>
 <p>至此环境已经搭建完成，开始漫长的spring学习</p>
+<h2 id="内容规划"><a href="#内容规划" class="headerlink" title="内容规划"></a>内容规划</h2><p>现在的计划是按照官方文档的顺序走，中间如果遇到一些比较核心的类就去尝试理解源码</p>
+<p>但是有一个问题：读源码往往需要贴代码，这样会让文章看上去很臃肿。所以计划是单独开辟一个分类Spring Framework源码，每个类写一篇</p>
+<p>而主线还是写在Spring Framework中，并在相关地方贴上源码阅读的链接</p>
 ]]></content>
       <categories>
         <category>spring</category>
@@ -3977,19 +3981,135 @@ flowchart LR
 <div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** Cache of singleton objects: bean name to bean instance. */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; singletonObjects = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;(<span class="number">256</span>);</span><br></pre></td></tr></table></figure></div>
 
 <p>在知道了bean容器是<code>ConcurrentHashMap</code>之外，还发现不管是类名、方法名还是变量名都有<code>singleton</code>，这很自然可以联想到<code>@Scope</code>作用域注解，可能不同作用域的bean存放在不同的地方，这一点后续再验证</p>
-<h2 id="三、定义bean"><a href="#三、定义bean" class="headerlink" title="三、定义bean"></a>三、定义bean</h2><p><img  
+<h2 id="三、bean"><a href="#三、bean" class="headerlink" title="三、bean"></a>三、bean</h2><p>官方文档中有这样一张图，从图中我们可以获得的信息：</p>
+<ul>
+<li>想要创建bean，需要business objects，也就是我们的业务类</li>
+<li>还需要configuration metadata，也就是配置元数据</li>
+<li>有以上两者后，spring容器会替我们实例化，让我们可以直接拿来使用</li>
+</ul>
+<p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/../../../images/spring/container-magic.png"
                       alt="container-magic"
                 ></p>
-<p>在spring最初的版本，只有通过xml来定义bean一种方法，而发展至今定义方式越来越多，但整体是从xml逐渐往注解过渡。</p>
+<p>基于xml的配置是spring最初的唯一配置方式，但随着spring的发展，注解配置逐渐兴起。现在更多是使用注解的形式，相比于xml更加方便(尤其是Spring Boot兴起后)。这里我想把各种定义bean的方式都尝试一遍，这样对这一块的认知会比较完整，但先还是跟着官方文档走，用最初的定义方式，后面会涉及。</p>
 <p>关于spring注解的发展可以看：<a class="link"   href="https://juejin.cn/post/7277799132110569533" >Spring注解编程的发展过程 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>关于bean的定义方式，这里先贴一篇别人的文章占下位置，因为这一块不是很重要，常用的就那么几种，<a class="link"   href="https://juejin.cn/post/6981815953784995847" >面试官：spring中定义bean的方法有哪些? 我一口气说出了12种，把面试官彻底征服了。 - 掘金 (juejin.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>关于bean的定义方式：<a class="link"   href="https://juejin.cn/post/6981815953784995847" >面试官：spring中定义bean的方法有哪些? 我一口气说出了12种，把面试官彻底征服了。 - 掘金 (juejin.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="3-1-bean的定义和使用"><a href="#3-1-bean的定义和使用" class="headerlink" title="3.1 bean的定义和使用"></a>3.1 bean的定义和使用</h3><p>首先，先编写一个初始用例。UserService依赖UserDao实现了一个用户查询逻辑：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">	User <span class="title function_">queryUser</span><span class="params">(String id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> UserDao userDao;</span><br><span class="line">	<span class="comment">// 这里必须提供set方法或者构造器，否则无法注入依赖</span></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">UserServiceImpl</span><span class="params">(UserDao userDao)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.userDao = userDao;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> User <span class="title function_">queryUser</span><span class="params">(String id)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> userDao.queryById(id);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserDao</span> &#123;</span><br><span class="line">	User <span class="title function_">queryById</span><span class="params">(String id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDaoImpl</span> <span class="keyword">implements</span> <span class="title class_">UserDao</span> &#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> User <span class="title function_">queryById</span><span class="params">(String id)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">User</span>(id, <span class="string">&quot;Spring Framework&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>在resources目录下，创建spring.xml，把两面两个类注册为bean</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">	   <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">	   <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">        https://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.kebing.dao.impl.UserDaoImpl&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.kebing.service.impl.UserServiceImpl&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这个和类提供了构造器还是set方法有关，这里是通过构造器注入，使用property实现set方法注入--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--name字段是userService中的成员变量名，ref是另一个bean的id--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">&quot;userDao&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;userDao&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>通过ApplicationContext来获取bean：</p>
+<p>这里有一个点，正常情况下我们的项目里是不需要自己调ApplicationContext.getBean来获取bean的</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;spring.xml&quot;</span>);</span><br><span class="line">		<span class="type">UserService</span> <span class="variable">userService</span> <span class="operator">=</span> context.getBean(<span class="string">&quot;userService&quot;</span>, UserService.class);</span><br><span class="line">		System.out.println(userService.queryUser(<span class="string">&quot;3&quot;</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>可以看到控制台打印：</p>
+<div class="highlight-container" data-rel="Txt"><figure class="iseeu highlight txt"><table><tr><td class="code"><pre><span class="line">User&#123;id=&#x27;3&#x27;, userName=&#x27;Spring Framework&#x27;&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="3-2-BeanDefinition"><a href="#3-2-BeanDefinition" class="headerlink" title="3.2 BeanDefinition"></a>3.2 BeanDefinition</h3><p>文档中提到：在容器本身中，这些Bean定义被表示为 <code>BeanDefinition</code> 对象，它包含（除其他信息外）以下元数据。</p>
+<ul>
+<li>一个全路径类名：通常，被定义的Bean的实际实现类。</li>
+<li>Bean的行为配置元素，它说明了Bean在容器中的行为方式（scope、生命周期回调，等等）。</li>
+<li>对其他Bean的引用，这些Bean需要做它的工作。这些引用也被称为合作者或依赖。</li>
+<li>要在新创建的对象中设置的其他配置设置—例如，pool的大小限制或在管理连接池的Bean中使用的连接数。</li>
+</ul>
+<p>文中并没有提到太多内容，可以知道的是，我们提供的配置最终被解析到了这里</p>
+<p>这里针对<code>BeanDefinition</code>源码展开学习：<a href="/2023/11/24/frame/springframeworkcode/1.spring%E6%BA%90%E7%A0%81GenericBeanDefinition/">Spring Framework源码(一) GenericBeanDefinition</a></p>
 ]]></content>
       <categories>
         <category>spring</category>
         <category>spring framework</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Spring Framework源码(一) GenericBeanDefinition</title>
+    <url>/2023/11/24/frame/springframeworkcode/1.spring%E6%BA%90%E7%A0%81GenericBeanDefinition/</url>
+    <content><![CDATA[<p>跟据官方文档，配置最终会被解析成<code>BeanDefinition</code></p>
+<p>找到这个类，发现是个接口，通过单步调式找到了实现类<code>GenericBeanDefinition</code>。并且可以大概知晓一些IoC容器创建bean的流程：</p>
+<pre class="mermaid">flowchart LR
+    step1[获取配置]-->step2[创建BeanDefinition]-->step3[实例化bean]</pre>
+
+<h2 id="一、简单示例"><a href="#一、简单示例" class="headerlink" title="一、简单示例"></a>一、简单示例</h2><p>既然xml配置或者是注解都是为了生成<code>BeanDefinition</code>实例，那么是否可以直接通过<code>BeanDefinition</code>，来实现创建bean呢？</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BeanDefinitionTests</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		example();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">example</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">DefaultListableBeanFactory</span> <span class="variable">beanFactory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultListableBeanFactory</span>();</span><br><span class="line"></span><br><span class="line">		<span class="type">GenericBeanDefinition</span> <span class="variable">beanDefinition</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GenericBeanDefinition</span>();</span><br><span class="line">		beanDefinition.setBeanClass(User.class);</span><br><span class="line">		<span class="comment">// 设置属性</span></span><br><span class="line">		List&lt;PropertyValue&gt; propertyValues = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">		propertyValues.add(<span class="keyword">new</span> <span class="title class_">PropertyValue</span>(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;6&quot;</span>));</span><br><span class="line">		propertyValues.add(<span class="keyword">new</span> <span class="title class_">PropertyValue</span>(<span class="string">&quot;userName&quot;</span>, <span class="string">&quot;spring&quot;</span>));</span><br><span class="line">		beanDefinition.setPropertyValues(<span class="keyword">new</span> <span class="title class_">MutablePropertyValues</span>(propertyValues));</span><br><span class="line"></span><br><span class="line">		<span class="comment">//注册到环境上下文</span></span><br><span class="line">		beanFactory.registerBeanDefinition(<span class="string">&quot;user&quot;</span>, beanDefinition);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 通过class取得bean</span></span><br><span class="line">		<span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> beanFactory.getBean(User.class);</span><br><span class="line">		System.out.println(user);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>答案是可行的。那么我们就可以先忽略如果处理配置这一步，从<code>BeanDefinition</code>开始入手，了解IoC容器是如何创建bean的</p>
+<h2 id="二、GenericBeanDefinition继承关系"><a href="#二、GenericBeanDefinition继承关系" class="headerlink" title="二、GenericBeanDefinition继承关系"></a>二、GenericBeanDefinition继承关系</h2><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../../../images/springframeworkcode/GenericBeanDefinition.jpg"
+                      alt="GenericBeanDefinition" style="zoom:60%;" 
+                >
+
+<h2 id="三、基础接口"><a href="#三、基础接口" class="headerlink" title="三、基础接口"></a>三、基础接口</h2><p><code>BeanMetadataElement</code>，只有一个方法，实现这个接口就具备了返回配置源的能力：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Object getSource()</code></td>
+<td>返回此元数据元素的配置源 {@code Object}（可能是 {@code null}）</td>
+</tr>
+</tbody></table>
+<p><code>AttributeAccessor</code>，属性访问器，实现该接口就具备了储存、访问元素的能力：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>void setAttribute(String name, @Nullable Object value);</code></td>
+<td>添加元素，value可以为null</td>
+</tr>
+<tr>
+<td><code>@Nullable Object getAttribute(String name);</code></td>
+<td>获取元素，可能返回null</td>
+</tr>
+<tr>
+<td><code>@Nullable Object removeAttribute(String name);</code></td>
+<td>移除并返回，可能返回null</td>
+</tr>
+<tr>
+<td><code>boolean hasAttribute(String name);</code></td>
+<td>判断是否存在</td>
+</tr>
+<tr>
+<td><code>String[] attributeNames();</code></td>
+<td>获取所有元素名</td>
+</tr>
+</tbody></table>
+<p>这两个接口是spring-core中的，是两个基础接口，应该是有很多实现类</p>
+<h2 id="四、AttributeAccessorSupport"><a href="#四、AttributeAccessorSupport" class="headerlink" title="四、AttributeAccessorSupport"></a>四、AttributeAccessorSupport</h2><p><code>AttributeAccessorSupport</code>同样在spring-core中，是一个抽象类，实现了<code>AttributeAccessor</code>和<code>Serializable</code>接口，是属性访问器的初步实现</p>
+<p>首先定义了元素存放的数据结构，是一个<code>LinkedHashMap</code>：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; attributes = <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>&lt;&gt;();</span><br></pre></td></tr></table></figure></div>
+
+<p>再来看接口中定义的几个方法实现</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 添加元素这里有一个点，如果这样调用setAttribute(&quot;spring&quot;, null);</span></span><br><span class="line"><span class="comment"> * 不是说将key为spring的value设置为null，而是直接移除spring这个key</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAttribute</span><span class="params">(String name, <span class="meta">@Nullable</span> Object value)</span> &#123;</span><br><span class="line">    <span class="comment">// name需要非null，如果给null会抛出IllegalArgumentException，是spring封装的一个判空方法</span></span><br><span class="line">    Assert.notNull(name, <span class="string">&quot;Name must not be null&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (value != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="built_in">this</span>.attributes.put(name, value);</span><br><span class="line">	 &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果value为null，不是说将这个key的value设为null，而是移除这个key</span></span><br><span class="line">        removeAttribute(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取元素，因为set方法不会保存value为null的key，所以这里如果返回null了，就是没有这个元素</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Nullable</span></span><br><span class="line"><span class="keyword">public</span> Object <span class="title function_">getAttribute</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    Assert.notNull(name, <span class="string">&quot;Name must not be null&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.attributes.get(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 移除元素</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Nullable</span></span><br><span class="line"><span class="keyword">public</span> Object <span class="title function_">removeAttribute</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    Assert.notNull(name, <span class="string">&quot;Name must not be null&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.attributes.remove(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 判断元素是否存在，contansKey方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasAttribute</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    Assert.notNull(name, <span class="string">&quot;Name must not be null&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.attributes.containsKey(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取所有元素名，keySet方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> String[] attributeNames() &#123;</span><br><span class="line">    <span class="keyword">return</span> StringUtils.toStringArray(<span class="built_in">this</span>.attributes.keySet());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>除了以上这些接口中定义的方法外，<code>AttributeAccessorSupport</code>还重写了equals和hashcode方法，使用attributes字段来实现。还有一个拷贝方法：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 这里就是将另一个AttributeAccessor中的元素拷贝过来，是浅拷贝</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">copyAttributesFrom</span><span class="params">(AttributeAccessor source)</span> &#123;</span><br><span class="line">    Assert.notNull(source, <span class="string">&quot;Source must not be null&quot;</span>);</span><br><span class="line">    String[] attributeNames = source.attributeNames();</span><br><span class="line">    <span class="keyword">for</span> (String attributeName : attributeNames) &#123;</span><br><span class="line">        setAttribute(attributeName, source.getAttribute(attributeName));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="五、BeanDefinition"><a href="#五、BeanDefinition" class="headerlink" title="五、BeanDefinition"></a>五、BeanDefinition</h2>]]></content>
+      <categories>
+        <category>spring</category>
+        <category>spring framework源码</category>
       </categories>
   </entry>
 </search>
