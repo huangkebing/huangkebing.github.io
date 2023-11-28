@@ -3959,9 +3959,9 @@ flowchart LR
     end
     subgraph B[使用IoC时]
     ClassC[UserService]-->|依赖|ClassD[UserDao]
-    ClassD -->|实例化并存储| IOC
-    IOC -->|提供依赖实例| ClassC
-    ClassC -->|实例化并存储| IOC
+    ClassD -->|1.实例化| IOC
+    IOC -->|2.提供依赖实例| ClassC
+    ClassC -->|3.实例化| IOC
     end
     A --> B</pre>
 
@@ -4027,8 +4027,8 @@ flowchart LR
       </categories>
   </entry>
   <entry>
-    <title>Spring Framework源码(一) GenericBeanDefinition</title>
-    <url>/2023/11/24/frame/springframeworkcode/1.spring%E6%BA%90%E7%A0%81GenericBeanDefinition/</url>
+    <title>Spring Framework源码(一) BeanDefinition</title>
+    <url>/2023/11/24/frame/springframeworkcode/1.spring%E6%BA%90%E7%A0%81BeanDefinition/</url>
     <content><![CDATA[<p>跟据官方文档，配置最终会被解析成<code>BeanDefinition</code></p>
 <p>找到这个类，发现是个接口，通过单步调式找到了实现类<code>GenericBeanDefinition</code>。并且可以大概知晓一些IoC容器创建bean的流程：</p>
 <pre class="mermaid">flowchart LR
@@ -4044,20 +4044,7 @@ flowchart LR
                      data-src="/../../../images/springframeworkcode/GenericBeanDefinition.png"
                       alt="GenericBeanDefinition继承关系"
                 ></p>
-<h2 id="三、基础接口"><a href="#三、基础接口" class="headerlink" title="三、基础接口"></a>三、基础接口</h2><p><code>BeanMetadataElement</code>，只有一个方法，实现这个接口就具备了返回配置源的能力：</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>Object getSource()</code></td>
-<td>返回此元数据元素的配置源 {@code Object}（可能是 {@code null}）</td>
-</tr>
-</tbody></table>
-<p><code>AttributeAccessor</code>，属性访问器，实现该接口就具备了储存、访问元素的能力：</p>
+<h2 id="三、基础接口"><a href="#三、基础接口" class="headerlink" title="三、基础接口"></a>三、基础接口</h2><p><code>AttributeAccessor</code>，属性访问器，实现该接口就具备了储存、访问元素的能力：</p>
 <table>
 <thead>
 <tr>
@@ -4086,7 +4073,33 @@ flowchart LR
 <td>获取所有元素名</td>
 </tr>
 </tbody></table>
-<p>这两个接口是spring-core中的，是两个基础接口，应该是有很多实现类</p>
+<p><code>BeanMetadataElement</code>，只有一个方法，实现这个接口就具备了返回源对象的能力：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Object getSource()</code></td>
+<td>返回此元数据元素的配置源 {@code Object}（可能是 {@code null}）</td>
+</tr>
+</tbody></table>
+<div class="note-large red"><div class="notel-title"><p>什么是源对象？</p>
+</div><div class="notel-content"><p>那么问题来了？这个源对象是什么东西？</p>
+</div></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BeanDefinitionTests</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		AnnotationTest();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">AnnotationTest</span><span class="params">()</span>&#123;</span><br><span class="line">		<span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(UserConfig.class);</span><br><span class="line">		<span class="type">ConfigurableListableBeanFactory</span> <span class="variable">beanFactory</span> <span class="operator">=</span> context.getBeanFactory();</span><br><span class="line">		<span class="type">BeanDefinition</span> <span class="variable">userService</span> <span class="operator">=</span> beanFactory.getBeanDefinition(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">		<span class="type">Object</span> <span class="variable">source</span> <span class="operator">=</span> userService.getSource();</span><br><span class="line">		System.out.println(userService.getSource());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>使用代码来看看这个source里是什么，运行后发现：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/springframeworkcode/BeanDefinition-souce.jpg"
+                      alt="BeanDefinition-souce"
+                ></p>
+<p>可以看到记录了全类名的方法名，这个方法正是<code>@Bean</code>注解下的方法，也就是说这个source中存储的就是bean被定义的地方</p>
 <h2 id="四、AttributeAccessorSupport"><a href="#四、AttributeAccessorSupport" class="headerlink" title="四、AttributeAccessorSupport"></a>四、AttributeAccessorSupport</h2><p><code>AttributeAccessorSupport</code>同样在spring-core中，是一个抽象类，实现了<code>AttributeAccessor</code>和<code>Serializable</code>接口，是属性访问器的初步实现</p>
 <p>首先定义了元素存放的数据结构，是一个<code>LinkedHashMap</code>：</p>
 <div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; attributes = <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>&lt;&gt;();</span><br></pre></td></tr></table></figure></div>
@@ -4105,7 +4118,223 @@ flowchart LR
 <p>除了以上这些接口中定义的方法外，<code>AttributeAccessorSupport</code>还重写了equals和hashcode方法，使用attributes字段来实现。还有一个拷贝方法：</p>
 <div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 这里就是将另一个AttributeAccessor中的元素拷贝过来，是浅拷贝</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">copyAttributesFrom</span><span class="params">(AttributeAccessor source)</span> &#123;</span><br><span class="line">    Assert.notNull(source, <span class="string">&quot;Source must not be null&quot;</span>);</span><br><span class="line">    String[] attributeNames = source.attributeNames();</span><br><span class="line">    <span class="keyword">for</span> (String attributeName : attributeNames) &#123;</span><br><span class="line">        setAttribute(attributeName, source.getAttribute(attributeName));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="五、BeanDefinition"><a href="#五、BeanDefinition" class="headerlink" title="五、BeanDefinition"></a>五、BeanDefinition</h2>]]></content>
+<h2 id="五、BeanMetadataAttributeAccessor"><a href="#五、BeanMetadataAttributeAccessor" class="headerlink" title="五、BeanMetadataAttributeAccessor"></a>五、BeanMetadataAttributeAccessor</h2><p><code>BeanMetadataAttributeAccessor</code>中，使用了<code>BeanMetadataAttribute</code>，先来看这个类</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line"><span class="meta">@Nullable</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Object value;</span><br><span class="line"><span class="meta">@Nullable</span></span><br><span class="line"><span class="keyword">private</span> Object source;</span><br></pre></td></tr></table></figure></div>
+
+<p>除了<code>BeanMetadataElement</code>中要求的source外，还增加了一个键值对，需要注意的是：</p>
+<ul>
+<li>source有get和set方法</li>
+<li>name，value只能通过构造器赋值，并没有提供set方法，只有get方法</li>
+</ul>
+<p><code>BeanMetadataAttributeAccessor</code>这个类是对<code>AttributeAccessorSupport</code>的扩展，有两点扩展：</p>
+<ul>
+<li>新增了source字段</li>
+<li>所有保存的元素，其value的类型都是<code>BeanMetadataAttribute</code></li>
+</ul>
+<h2 id="六、BeanDefinition"><a href="#六、BeanDefinition" class="headerlink" title="六、BeanDefinition"></a>六、BeanDefinition</h2><p>从官方文档中得知，bean的所有信息都存储在BeanDefinition中，当然实际上肯定是他的实现类来实现存储。接口中定义的两组成员变量，先来看看：</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>String SCOPE_SINGLETON = ConfigurableBeanFactory.SCOPE_SINGLETON;</code></td>
+<td>单例作用域的作用域标识符</td>
+</tr>
+<tr>
+<td><code>String SCOPE_PROTOTYPE = ConfigurableBeanFactory.SCOPE_PROTOTYPE;</code></td>
+<td>原型作用域的作用域标识符</td>
+</tr>
+</tbody></table>
+<p>这两个变量是bean的作用域标识符，简单来说单例作用域就是不管获取多少次bean都是同一个实例；而原型作用域，每次获取都会创建一个新的实例</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>int ROLE_APPLICATION = 0;</code></td>
+<td>角色定义，应用程序的主要bean，通常是用户定义的bean</td>
+</tr>
+<tr>
+<td><code>int ROLE_SUPPORT = 1;</code></td>
+<td>角色定义，通常是某些较大配置的支持部分</td>
+</tr>
+<tr>
+<td><code>int ROLE_INFRASTRUCTURE = 2;</code></td>
+<td>角色定义，基础设施，即内部工作的bean</td>
+</tr>
+</tbody></table>
+<p>这三个变量将bean划分为了3个角色，我们定义的bean通常就是<code>ROLE_APPLICATION</code>。</p>
+<p>然后来看方法，方法大部分都是get和set方法，而这些方法大多都和配置相呼应。BeanDefinition有点像是我们的实体类，用于存放数据。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>void setParentName(@Nullable String parentName);</code></td>
+<td>设置此 BeanDefinition 的父定义的名称</td>
+</tr>
+<tr>
+<td><code>@Nullable String getParentName();</code></td>
+<td>返回此 BeanDefinition 的父定义的名称</td>
+</tr>
+<tr>
+<td><code>void setBeanClassName(@Nullable String beanClassName);</code></td>
+<td>指定此 Bean 定义的 Bean 类名。可以在 Bean 工厂后处理期间修改类名，通常用它的解析变体替换原始类名</td>
+</tr>
+<tr>
+<td><code>@Nullable String getBeanClassName();</code></td>
+<td>返回此 Bean 定义的 Bean 类名。试着调用了一下返回的是全类名</td>
+</tr>
+<tr>
+<td><code>void setScope(@Nullable String scope);</code></td>
+<td>覆盖此 Bean 的目标作用域，并指定新的作用域名称</td>
+</tr>
+<tr>
+<td><code>@Nullable String getScope();</code></td>
+<td>返回此 Bean 的目标作用域</td>
+</tr>
+<tr>
+<td><code>void setLazyInit(boolean lazyInit);</code></td>
+<td>设置是否应延迟初始化此 bean。如果false，则 Bean 将在启动时由执行单例预先初始化的 Bean 工厂实例化</td>
+</tr>
+<tr>
+<td><code>boolean isLazyInit();</code></td>
+<td>返回此 Bean 是否应该延迟初始化，即在启动时不急于实例化。仅适用于单例 bean</td>
+</tr>
+<tr>
+<td><code>void setDependsOn(@Nullable String... dependsOn);</code></td>
+<td>设置此 Bean 所依赖的要初始化的 Bean 的名称。Bean 工厂将保证这些 Bean 首先初始化</td>
+</tr>
+<tr>
+<td><code>@Nullable String[] getDependsOn();</code></td>
+<td>返回此 Bean 所依赖的 Bean 名称。</td>
+</tr>
+<tr>
+<td><code>void setAutowireCandidate(boolean autowireCandidate);</code></td>
+<td>设置此 Bean 是否是自动注入到其他 Bean。请注意，此标志旨在仅影响基于类型的自动注入。如果按名称自动注入，即使指定的 Bean 该标记为false，仍会注入 bean</td>
+</tr>
+<tr>
+<td><code>boolean isAutowireCandidate();</code></td>
+<td>返回此 Bean 是否是自动注入到其他 Bean 的候选者</td>
+</tr>
+<tr>
+<td><code>void setPrimary(boolean primary);</code></td>
+<td>设置此 Bean 是否为自动注入主候选项。如果有多个bean被匹配到，取该值为true的bean</td>
+</tr>
+<tr>
+<td><code>boolean isPrimary();</code></td>
+<td>返回此 Bean 是否为主要的自动注入候选项</td>
+</tr>
+<tr>
+<td><code>void setFactoryBeanName(@Nullable String factoryBeanName);</code></td>
+<td>指定要使用的工厂Bean的名称（如果有）</td>
+</tr>
+<tr>
+<td><code>@Nullable String getFactoryBeanName();</code></td>
+<td>返回工厂Bean的名称</td>
+</tr>
+<tr>
+<td><code>void setFactoryMethodName(@Nullable String factoryMethodName);</code></td>
+<td>指定工厂方法（如果有）。此方法将使用构造函数参数调用，如果未指定任何参数，则不调用任何参数。该方法将在指定的工厂 Bean（如果有）上调用，或者作为本地 Bean 类上的静态方法调用。</td>
+</tr>
+<tr>
+<td><code>@Nullable String getFactoryMethodName();</code></td>
+<td>返回工厂方法</td>
+</tr>
+<tr>
+<td><code>ConstructorArgumentValues getConstructorArgumentValues();</code></td>
+<td>返回此 Bean 的构造函数参数值</td>
+</tr>
+<tr>
+<td><code>boolean hasConstructorArgumentValues()</code></td>
+<td>返回此 Bean 是否定义了构造函数参数值，5.0.2版本新增方法</td>
+</tr>
+<tr>
+<td><code>MutablePropertyValues getPropertyValues();</code></td>
+<td>返回要应用于 Bean 的新实例的属性值</td>
+</tr>
+<tr>
+<td><code>boolean hasPropertyValues()</code></td>
+<td>返回此 Bean 是否定义了属性值，5.0.2版本新增方法</td>
+</tr>
+<tr>
+<td><code>void setInitMethodName(@Nullable String initMethodName);</code></td>
+<td>设置 init 方法的名称</td>
+</tr>
+<tr>
+<td><code>@Nullable String getInitMethodName();</code></td>
+<td>返回 init 方法的名称</td>
+</tr>
+<tr>
+<td><code>void setDestroyMethodName(@Nullable String destroyMethodName);</code></td>
+<td>设置 destroy 方法的名称</td>
+</tr>
+<tr>
+<td><code>@Nullable String getDestroyMethodName();</code></td>
+<td>返回 destroy 方法的名称</td>
+</tr>
+<tr>
+<td><code>void setRole(int role);</code></td>
+<td>为此 bean 设置角色提示</td>
+</tr>
+<tr>
+<td><code>int getRole();</code></td>
+<td>返回此 bean 的角色提示</td>
+</tr>
+<tr>
+<td><code>void setDescription(@Nullable String description);</code></td>
+<td>设置此 Bean 的人类可读描述</td>
+</tr>
+<tr>
+<td><code>@Nullable String getDescription();</code></td>
+<td>返回此 Bean 定义的人类可读描述</td>
+</tr>
+</tbody></table>
+<p>还有几个可读属性，只有get方法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ResolvableType getResolvableType();</code></td>
+<td>根据 Bean 类或其他特定元数据，返回此 Bean 定义的可解析类型。</td>
+</tr>
+<tr>
+<td><code>boolean isSingleton();</code></td>
+<td>返回是否是单例作用域</td>
+</tr>
+<tr>
+<td><code>boolean isPrototype();</code></td>
+<td>返回是否是原型作用域</td>
+</tr>
+<tr>
+<td><code>boolean isAbstract();</code></td>
+<td>返回此 Bean 是否为“抽象”，即不打算实例化</td>
+</tr>
+<tr>
+<td><code>@Nullable String getResourceDescription();</code></td>
+<td>返回此 Bean 定义所来自的资源的描述（用于在出现错误时显示上下文）</td>
+</tr>
+<tr>
+<td><code>@Nullable BeanDefinition getOriginatingBeanDefinition();</code></td>
+<td>返回原始 BeanDefinition，如果没有，则返回 null</td>
+</tr>
+</tbody></table>
+<h2 id="七、AbstractBeanDefinition"><a href="#七、AbstractBeanDefinition" class="headerlink" title="七、AbstractBeanDefinition"></a>七、AbstractBeanDefinition</h2><p>这个类非常像日常业务中的实体类，包含了配置需要的字段，相应的get、set方法，以及构造器，对<code>BeanDifinition</code>中定义的方法做了实现</p>
+<p>不需要去深入理解</p>
+]]></content>
       <categories>
         <category>spring</category>
         <category>spring framework源码</category>
