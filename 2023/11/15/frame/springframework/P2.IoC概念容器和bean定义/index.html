@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/spring/container-magic.png">
 <meta property="article:published_time" content="2023-11-15T02:04:47.000Z">
-<meta property="article:modified_time" content="2023-11-27T06:42:19.953Z">
+<meta property="article:modified_time" content="2023-12-21T05:56:50.784Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/spring/container-magic.png">
@@ -304,8 +304,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-11-27 14:42:19</span>
-            <span class="mobile">2023-11-27 14:42:19</span>
+            <span class="desktop">2023-12-21 13:56:50</span>
+            <span class="mobile">2023-12-21 13:56:50</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -319,17 +319,7 @@
                     
                         
                         <li>
-                            <a href="/categories/spring/">spring</a>&nbsp;
-                        </li>
-                    
-                    
-                
-                    
-                        
-                            <li>></li>
-                        
-                        <li>
-                            <a href="/categories/spring/spring-framework/">spring framework</a>&nbsp;
+                            <a href="/categories/spring-framework/">spring framework</a>&nbsp;
                         </li>
                     
                     
@@ -342,12 +332,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.7k 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fa-regular fa-clock"></i>&nbsp;<span>7 分钟</span>
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>8 分钟</span>
         </span>
     
     
@@ -415,7 +405,7 @@
 <div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Cache of singleton objects: bean name to bean instance. */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; singletonObjects = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;(<span class="number">256</span>);</span><br></pre></td></tr></table></figure></div>
 
 <p>在知道了bean容器是<code>ConcurrentHashMap</code>之外，还发现不管是类名、方法名还是变量名都有<code>singleton</code>，这很自然可以联想到<code>@Scope</code>作用域注解，可能不同作用域的bean存放在不同的地方，这一点后续再验证</p>
-<h2 id="三、bean"><a href="#三、bean" class="headerlink" title="三、bean"></a>三、bean</h2><p>官方文档中有这样一张图，从图中我们可以获得的信息：</p>
+<h2 id="三、bean简单了解"><a href="#三、bean简单了解" class="headerlink" title="三、bean简单了解"></a>三、bean简单了解</h2><p>官方文档中有这样一张图，从图中我们可以获得的信息：</p>
 <ul>
 <li>想要创建bean，需要business objects，也就是我们的业务类</li>
 <li>还需要configuration metadata，也就是配置元数据</li>
@@ -453,7 +443,18 @@
 <li>要在新创建的对象中设置的其他配置设置—例如，pool的大小限制或在管理连接池的Bean中使用的连接数。</li>
 </ul>
 <p>文中并没有提到太多内容，可以知道的是，我们提供的配置最终被解析到了这里</p>
-<p>这里针对<code>BeanDefinition</code>源码展开学习：<a href="/2023/11/24/frame/springframeworkcode/1.spring%E6%BA%90%E7%A0%81GenericBeanDefinition/">Spring Framework源码(一) GenericBeanDefinition</a></p>
+<p>这里针对<code>BeanDefinition</code>源码展开学习：<a href="/2023/11/24/frame/springframeworkcode/1.spring%E6%BA%90%E7%A0%81BeanDefinition/">Spring Framework源码(一) BeanDefinition</a></p>
+<p>而至于类中每个变量对应哪个配置，或者说每个变量如何配置，计划等到注解时再来一一核对</p>
+<h2 id="四、IoC过程"><a href="#四、IoC过程" class="headerlink" title="四、IoC过程"></a>四、IoC过程</h2><p>结合文档学习后，对IoC已经有了一定理解，是时候从入口着手研究整个流程了，带上问题开始调试</p>
+<div class="note-large red"><div class="notel-title"><p>IoC容器到底是怎么创建bean的？</p>
+</div><div class="notel-content"><p>通过前面的简单了解，我们知道了IoC容器的数据结构，也知道配置最终解析成了BeanDefinition，那么实例是如何创建的呢？ApplicationContext、BeanFactory这些类又是做什么的呢？</p>
+</div></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BeanDefinitionTests</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		xmlTest();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">xmlTest</span><span class="params">()</span>&#123;</span><br><span class="line">		<span class="type">ClassPathXmlApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;spring.xml&quot;</span>);</span><br><span class="line">		<span class="type">UserService</span> <span class="variable">userService</span> <span class="operator">=</span> context.getBean(<span class="string">&quot;userService&quot;</span>, UserService.class);</span><br><span class="line">		userService.queryUser(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>从<code>ApplicationContext</code>入手，两行代码就从配置文件变成了实例对象，那么IoC的过程肯定也就在这两行中</p>
+<p>进入<code>ApplicationContext</code>的源码，发现很多都是调用了<code>BeanFactory</code>的实现，可以理解为<code>ApplicationContext</code>基于<code>BeanFactory</code>的能力进行了扩展</p>
+<p>这样一来，就必须先了解<code>BeanFactory</code>：<a href="/2023/11/28/frame/springframeworkcode/2.spring%E6%BA%90%E7%A0%81BeanFactory/">Spring Framework源码(二) BeanFactory</a></p>
 
         </div>
 
@@ -469,13 +470,13 @@
                     <div class="article-prev">
                         <a class="prev"
                         rel="prev"
-                        href="/2023/11/24/frame/springframeworkcode/1.spring%E6%BA%90%E7%A0%81BeanDefinition/"
+                        href="/2023/11/24/frame/springframeworkcode/BeanDefinition/1.spring%E6%BA%90%E7%A0%81BeanDefinition/"
                         >
                             <span class="left arrow-icon flex justify-center items-center">
                                 <i class="fa-solid fa-chevron-left"></i>
                             </span>
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">Spring Framework源码(一) BeanDefinition</span>
+                                <span class="post-nav-title-item">Spring Framework源码(系列一) BeanDefinition概览</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -510,7 +511,7 @@
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
         <div class="page-title">第二章、IoC概念、容器和bean定义</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFIoC"><span class="nav-text">一、什么是IoC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%B9%E5%99%A8"><span class="nav-text">二、容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81bean"><span class="nav-text">三、bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-bean%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-text">3.1 bean的定义和使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-BeanDefinition"><span class="nav-text">3.2 BeanDefinition</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFIoC"><span class="nav-text">一、什么是IoC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%B9%E5%99%A8"><span class="nav-text">二、容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81bean%E7%AE%80%E5%8D%95%E4%BA%86%E8%A7%A3"><span class="nav-text">三、bean简单了解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-bean%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-text">3.1 bean的定义和使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-BeanDefinition"><span class="nav-text">3.2 BeanDefinition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81IoC%E8%BF%87%E7%A8%8B"><span class="nav-text">四、IoC过程</span></a></li></ol>
 
     </div>
 </div>
