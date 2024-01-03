@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>第三章、剑指offer(21~30) | program-inn</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="/images/system/favicon.ico">
+    <meta name="description" content="记录，成为更好的自己">
+    
+    <link rel="preload" href="/assets/css/0.styles.3ab2c0ae.css" as="style"><link rel="preload" href="/assets/js/app.23be6c0f.js" as="script"><link rel="preload" href="/assets/js/2.50cace40.js" as="script"><link rel="preload" href="/assets/js/1.c3bdb197.js" as="script"><link rel="preload" href="/assets/js/40.1da35dfb.js" as="script"><link rel="prefetch" href="/assets/js/10.00b932f8.js"><link rel="prefetch" href="/assets/js/11.cdaabcf3.js"><link rel="prefetch" href="/assets/js/12.c71dde7b.js"><link rel="prefetch" href="/assets/js/13.d30d40dc.js"><link rel="prefetch" href="/assets/js/14.2022aba7.js"><link rel="prefetch" href="/assets/js/15.75947085.js"><link rel="prefetch" href="/assets/js/16.493734ea.js"><link rel="prefetch" href="/assets/js/17.ad85ff27.js"><link rel="prefetch" href="/assets/js/18.a300fe22.js"><link rel="prefetch" href="/assets/js/19.0520a5d5.js"><link rel="prefetch" href="/assets/js/20.e559d091.js"><link rel="prefetch" href="/assets/js/21.85e14c0a.js"><link rel="prefetch" href="/assets/js/22.4a0aa910.js"><link rel="prefetch" href="/assets/js/23.86c4d30f.js"><link rel="prefetch" href="/assets/js/24.b1190b37.js"><link rel="prefetch" href="/assets/js/25.b38f9fee.js"><link rel="prefetch" href="/assets/js/26.49048392.js"><link rel="prefetch" href="/assets/js/27.57349a42.js"><link rel="prefetch" href="/assets/js/28.402154c5.js"><link rel="prefetch" href="/assets/js/29.260bdef7.js"><link rel="prefetch" href="/assets/js/3.0e58db1b.js"><link rel="prefetch" href="/assets/js/30.56476bba.js"><link rel="prefetch" href="/assets/js/31.87fc1a29.js"><link rel="prefetch" href="/assets/js/32.f567d41b.js"><link rel="prefetch" href="/assets/js/33.5b2fc219.js"><link rel="prefetch" href="/assets/js/34.955668bc.js"><link rel="prefetch" href="/assets/js/35.7d099470.js"><link rel="prefetch" href="/assets/js/36.d6910d27.js"><link rel="prefetch" href="/assets/js/37.69ea02bc.js"><link rel="prefetch" href="/assets/js/38.e2fe1664.js"><link rel="prefetch" href="/assets/js/39.d9896b47.js"><link rel="prefetch" href="/assets/js/4.943201ce.js"><link rel="prefetch" href="/assets/js/41.29ab09b3.js"><link rel="prefetch" href="/assets/js/42.43570400.js"><link rel="prefetch" href="/assets/js/43.82a26677.js"><link rel="prefetch" href="/assets/js/44.cba1f671.js"><link rel="prefetch" href="/assets/js/45.cb10736a.js"><link rel="prefetch" href="/assets/js/46.49bd1f28.js"><link rel="prefetch" href="/assets/js/47.246f3398.js"><link rel="prefetch" href="/assets/js/48.b41232b5.js"><link rel="prefetch" href="/assets/js/49.4dba4ec4.js"><link rel="prefetch" href="/assets/js/5.2c7f2298.js"><link rel="prefetch" href="/assets/js/50.66a55f2a.js"><link rel="prefetch" href="/assets/js/51.32c9eef0.js"><link rel="prefetch" href="/assets/js/52.f1d7ac15.js"><link rel="prefetch" href="/assets/js/53.7e731071.js"><link rel="prefetch" href="/assets/js/54.367b551d.js"><link rel="prefetch" href="/assets/js/6.f2303670.js"><link rel="prefetch" href="/assets/js/7.39306650.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.0115b510.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3ab2c0ae.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">program-inn</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/md/guide/2024-01-01-1-guide.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/md/algorithm/offer/.html" class="nav-link">
+  容器
+</a></li><li class="dropdown-item"><!----> <a href="/md/java/thread/2023-12-28-1-并发的基本概念.html" class="nav-link">
+  并发
+</a></li><li class="dropdown-item"><!----> <a href="/md/java/jvm/2023-05-26-1-JVM概览.html" class="nav-link">
+  JVM
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Spring" class="dropdown-title"><span class="title">Spring</span> <span class="arrow down"></span></button> <button type="button" aria-label="Spring" class="mobile-dropdown-title"><span class="title">Spring</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/md/spring/spring-framework/2023-11-14-1-前言&amp;环境构建.html" class="nav-link">
+  spring framework
+</a></li><li class="dropdown-item"><!----> <a href="/md/spring/spring-framework-code/BeanDefinition/2023-11-24-1-BeanDefinition概述.html" class="nav-link">
+  spring framework源码
+</a></li><li class="dropdown-item"><!----> <a href="/md/spring/spring-cloud/2023-08-18-1-SpringCloud尝试.html" class="nav-link">
+  Spring Cloud
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/md/algorithm/offer/2023-05-10-1-剑指offer.html" class="nav-link">
+  剑指offer系列
+</a></li><li class="dropdown-item"><!----> <a href="/md/algorithm/offer2/2023-08-02-1-剑指offer2.html" class="nav-link">
+  剑指offerⅡ系列
+</a></li><li class="dropdown-item"><!----> <a href="/md/algorithm/point/2023-06-13-1-排序专项.html" class="nav-link">
+  专项系列
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="基础巩固" class="dropdown-title"><span class="title">基础巩固</span> <span class="arrow down"></span></button> <button type="button" aria-label="基础巩固" class="mobile-dropdown-title"><span class="title">基础巩固</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/md/algorithm/offer/.html" class="nav-link">
+  计算机网络
+</a></li></ul></div></div><div class="nav-item"><a href="/md/utils/2023-01-01-1-blogs.html" class="nav-link">
+  工具杂记
+</a></div><div class="nav-item"><a href="https://github.com/huangkebing" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/md/guide/2024-01-01-1-guide.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/md/algorithm/offer/.html" class="nav-link">
+  容器
+</a></li><li class="dropdown-item"><!----> <a href="/md/java/thread/2023-12-28-1-并发的基本概念.html" class="nav-link">
+  并发
+</a></li><li class="dropdown-item"><!----> <a href="/md/java/jvm/2023-05-26-1-JVM概览.html" class="nav-link">
+  JVM
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Spring" class="dropdown-title"><span class="title">Spring</span> <span class="arrow down"></span></button> <button type="button" aria-label="Spring" class="mobile-dropdown-title"><span class="title">Spring</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/md/spring/spring-framework/2023-11-14-1-前言&amp;环境构建.html" class="nav-link">
+  spring framework
+</a></li><li class="dropdown-item"><!----> <a href="/md/spring/spring-framework-code/BeanDefinition/2023-11-24-1-BeanDefinition概述.html" class="nav-link">
+  spring framework源码
+</a></li><li class="dropdown-item"><!----> <a href="/md/spring/spring-cloud/2023-08-18-1-SpringCloud尝试.html" class="nav-link">
+  Spring Cloud
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/md/algorithm/offer/2023-05-10-1-剑指offer.html" class="nav-link">
+  剑指offer系列
+</a></li><li class="dropdown-item"><!----> <a href="/md/algorithm/offer2/2023-08-02-1-剑指offer2.html" class="nav-link">
+  剑指offerⅡ系列
+</a></li><li class="dropdown-item"><!----> <a href="/md/algorithm/point/2023-06-13-1-排序专项.html" class="nav-link">
+  专项系列
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="基础巩固" class="dropdown-title"><span class="title">基础巩固</span> <span class="arrow down"></span></button> <button type="button" aria-label="基础巩固" class="mobile-dropdown-title"><span class="title">基础巩固</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/md/algorithm/offer/.html" class="nav-link">
+  计算机网络
+</a></li></ul></div></div><div class="nav-item"><a href="/md/utils/2023-01-01-1-blogs.html" class="nav-link">
+  工具杂记
+</a></div><div class="nav-item"><a href="https://github.com/huangkebing" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>剑指offer系列</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/md/algorithm/offer/2023-05-10-1-剑指offer.html" class="sidebar-link">第一章、剑指offer(03~10)</a></li><li><a href="/md/algorithm/offer/2023-05-20-2-剑指offer.html" class="sidebar-link">第二章、剑指offer(11~20)</a></li><li><a href="/md/algorithm/offer/2023-05-30-3-剑指offer.html" class="active sidebar-link">第三章、剑指offer(21~30)</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/md/algorithm/offer/2023-05-30-3-剑指offer.html#_21、调整数组顺序使奇数位于偶数前面" class="sidebar-link">21、调整数组顺序使奇数位于偶数前面</a></li><li class="sidebar-sub-header"><a href="/md/algorithm/offer/2023-05-30-3-剑指offer.html#_22、链表中倒数第k个节点" class="sidebar-link">22、链表中倒数第k个节点</a></li><li class="sidebar-sub-header"><a href="/md/algorithm/offer/2023-05-30-3-剑指offer.html#_23、反转链表" class="sidebar-link">23、反转链表</a></li><li class="sidebar-sub-header"><a href="/md/algorithm/offer/2023-05-30-3-剑指offer.html#_25、合并两个排序的链表" class="sidebar-link">25、合并两个排序的链表</a></li><li class="sidebar-sub-header"><a href="/md/algorithm/offer/2023-05-30-3-剑指offer.html#_26、树的子结构" class="sidebar-link">26、树的子结构</a></li><li class="sidebar-sub-header"><a href="/md/algorithm/offer/2023-05-30-3-剑指offer.html#_27、二叉树的镜像" class="sidebar-link">27、二叉树的镜像</a></li><li class="sidebar-sub-header"><a href="/md/algorithm/offer/2023-05-30-3-剑指offer.html#_28、对称的二叉树" class="sidebar-link">28、对称的二叉树</a></li><li class="sidebar-sub-header"><a href="/md/algorithm/offer/2023-05-30-3-剑指offer.html#_29、顺时针打印矩阵" class="sidebar-link">29、顺时针打印矩阵</a></li><li class="sidebar-sub-header"><a href="/md/algorithm/offer/2023-05-30-3-剑指offer.html#_30、包含min函数的栈" class="sidebar-link">30、包含min函数的栈</a></li></ul></li><li><a href="/md/algorithm/offer/2023-06-11-4-剑指offer.html" class="sidebar-link">第四章、剑指offer(31~40)</a></li><li><a href="/md/algorithm/offer/2023-06-25-5-剑指offer.html" class="sidebar-link">第五章、剑指offer(41~50)</a></li><li><a href="/md/algorithm/offer/2023-07-05-6-剑指offer.html" class="sidebar-link">第六章、剑指offer(51~60)</a></li><li><a href="/md/algorithm/offer/2023-07-17-7-剑指offer.html" class="sidebar-link">第七章、剑指offer(61~68)</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="第三章、剑指offer-21-30"><a href="#第三章、剑指offer-21-30" class="header-anchor">#</a> 第三章、剑指offer(21~30)</h1> <h2 id="_21、调整数组顺序使奇数位于偶数前面"><a href="#_21、调整数组顺序使奇数位于偶数前面" class="header-anchor">#</a> 21、调整数组顺序使奇数位于偶数前面</h2> <div class="custom-block tip"><p class="custom-block-title">easy</p> <p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数在数组的前半部分，所有偶数在数组的后半部分。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>示例：
+输入：nums = [1,2,3,4]
+输出：[1,3,2,4] 
+注：[3,1,2,4] 也是正确的答案之一
+
+提示：
+1. 0 &lt;= nums.length &lt;= 50000
+2. 0 &lt;= nums[i] &lt;= 10000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div></div> <p>有两种思路</p> <ol><li>基于双指针</li></ol> <p>快指针用于遍历数组，慢指针记录奇数位置，当快指针遍历到奇数时快慢指针交换值</p> <ol start="2"><li>直接思路</li></ol> <p>将奇偶数分成两个数组，再将偶数添加到奇数尾部</p> <p>当前双指针效率更高一些，只涉及一次遍历，且无额外的数组空间消耗</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">exchange</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> slow <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> fast <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> tmp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>nums<span class="token punctuation">[</span>fast<span class="token punctuation">]</span> <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                tmp <span class="token operator">=</span> nums<span class="token punctuation">[</span>fast<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                nums<span class="token punctuation">[</span>fast<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>slow<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                nums<span class="token punctuation">[</span>slow<span class="token punctuation">]</span> <span class="token operator">=</span> tmp<span class="token punctuation">;</span>
+                slow<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            fast<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> nums<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h2 id="_22、链表中倒数第k个节点"><a href="#_22、链表中倒数第k个节点" class="header-anchor">#</a> 22、链表中倒数第k个节点</h2> <div class="custom-block tip"><p class="custom-block-title">easy</p> <p>输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。</p> <p>例如，一个链表有 <code>6</code> 个节点，从头节点开始，它们的值依次是 <code>1、2、3、4、5、6</code>。这个链表的倒数第 <code>3</code> 个节点是值为 <code>4</code> 的节点。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>示例：
+给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 k = 2.
+返回链表 4-&gt;5.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div></div> <p>使用快慢指针，用差值的思想。跟据题意：</p> <ul><li>快慢指针的下标相差k-1(如123456，取倒数第3个，那么快指针应当在3，慢指针在1)</li> <li>随后将快慢指针同步平移，直至快指针到达链表尾部</li> <li>此时慢指针即是解</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token class-name">ListNode</span> <span class="token function">getKthFromEnd</span><span class="token punctuation">(</span><span class="token class-name">ListNode</span> head<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">ListNode</span> fast <span class="token operator">=</span> head<span class="token punctuation">,</span> slow <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> k <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            fast <span class="token operator">=</span> fast<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>fast<span class="token punctuation">.</span>next <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            fast <span class="token operator">=</span> fast<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            slow <span class="token operator">=</span> slow<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> slow<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h2 id="_23、反转链表"><a href="#_23、反转链表" class="header-anchor">#</a> 23、反转链表</h2> <div class="custom-block tip"><p class="custom-block-title">easy</p> <p>定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>示例:
+输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
+
+限制：
+0 &lt;= 节点个数 &lt;= 5000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><strong>注意</strong>：本题与主站 206 题相同：https://leetcode-cn.com/problems/reverse-linked-list/</p></div> <p>将当前节点的next指针指向前置节点，头节点next置为null</p> <p>但此处链表是单链表，所以需要定义变量来缓存前置节点</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token class-name">ListNode</span> <span class="token function">reverseList</span><span class="token punctuation">(</span><span class="token class-name">ListNode</span> head<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>head <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> head<span class="token punctuation">.</span>next <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span> head<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token class-name">ListNode</span> p1 <span class="token operator">=</span> head<span class="token punctuation">,</span>p2 <span class="token operator">=</span> p1<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        p1<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token class-name">ListNode</span> curr <span class="token operator">=</span> p2<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>curr <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            p2<span class="token punctuation">.</span>next <span class="token operator">=</span> p1<span class="token punctuation">;</span>
+            p1 <span class="token operator">=</span> p2<span class="token punctuation">;</span>
+            p2 <span class="token operator">=</span> curr<span class="token punctuation">;</span>
+            curr <span class="token operator">=</span> curr<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        p2<span class="token punctuation">.</span>next <span class="token operator">=</span> p1<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> p2<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><h2 id="_25、合并两个排序的链表"><a href="#_25、合并两个排序的链表" class="header-anchor">#</a> 25、合并两个排序的链表</h2> <div class="custom-block tip"><p class="custom-block-title">easy</p> <p>输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>示例1：
+输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
+
+限制：
+0 &lt;= 链表长度 &lt;= 1000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>注意：本题与主站 21 题相同：https://leetcode-cn.com/problems/merge-two-sorted-lists/</p></div> <p>因为链表是排序的，所以只需要比较两个链表的当前首节点即可</p> <p>但要注意null(即链表比完)的情况：</p> <ul><li>有空链表，则直接返回另一条</li> <li>某一条链表用完，需要将另一条加到生成链表的尾部</li></ul> <p>两个链表均有值时，取小值添加到生成链表的尾部，具体可以结合代码注释</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token class-name">ListNode</span> <span class="token function">mergeTwoLists</span><span class="token punctuation">(</span><span class="token class-name">ListNode</span> l1<span class="token punctuation">,</span> <span class="token class-name">ListNode</span> l2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 先判断是否有空链</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>l1 <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> l2<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>l2 <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> l1<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 排除空链后，取两个链表中的小值作为头节点</span>
+        <span class="token class-name">ListNode</span> head<span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>l1<span class="token punctuation">.</span>val <span class="token operator">&gt;=</span> l2<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            head <span class="token operator">=</span> l2<span class="token punctuation">;</span>
+            l2 <span class="token operator">=</span> l2<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            head <span class="token operator">=</span> l1<span class="token punctuation">;</span>
+            l1 <span class="token operator">=</span> l1<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 两个链表均有节点时，获取小值，直到有一个链表用完</span>
+        <span class="token class-name">ListNode</span> p <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>l1 <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> l2 <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>l1<span class="token punctuation">.</span>val <span class="token operator">&gt;=</span> l2<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                p<span class="token punctuation">.</span>next <span class="token operator">=</span> l2<span class="token punctuation">;</span>
+                l2 <span class="token operator">=</span> l2<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                p<span class="token punctuation">.</span>next <span class="token operator">=</span> l1<span class="token punctuation">;</span>
+                l1 <span class="token operator">=</span> l1<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            p <span class="token operator">=</span> p<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 将剩余链表接到新链表中</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>l1 <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            p<span class="token punctuation">.</span>next <span class="token operator">=</span> l1<span class="token punctuation">;</span>
+            l1 <span class="token operator">=</span> l1<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            p <span class="token operator">=</span> p<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>l2 <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            p<span class="token punctuation">.</span>next <span class="token operator">=</span> l2<span class="token punctuation">;</span>
+            l2 <span class="token operator">=</span> l2<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            p <span class="token operator">=</span> p<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> head<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br></div></div><h2 id="_26、树的子结构"><a href="#_26、树的子结构" class="header-anchor">#</a> 26、树的子结构</h2> <div class="custom-block warning"><p class="custom-block-title">medium</p> <p>输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)</p> <p>B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>例如:
+给定的树 A:
+    3
+   / \
+  4   5
+ / \ 
+1	2
+给定的树 B:
+  4
+ /
+1
+返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。
+
+示例 1：
+输入：A = [1,2,3], B = [3,1]
+输出：false
+示例 2：
+输入：A = [3,4,5,1,2], B = [4,1]
+输出：true
+
+限制：
+0 &lt;= 节点个数 &lt;= 10000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div></div> <p>凡是二叉树的题，基本是用递归没跑</p> <p>但这里首先在A中找到B的根节点，然后再依次比对子节点，如果比对不上还需要继续查找根节点</p> <p>然后就纳闷了这递归要怎么写，最后找到用双递归</p> <p>看来这一类题还是不到火候，只直到用递归但要写出代码还少点感觉，还需要继续刷题思考总结</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token comment">//函数的作用就是判断B 是否是 A 的子结构树</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isSubStructure</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> <span class="token class-name">A</span><span class="token punctuation">,</span> <span class="token class-name">TreeNode</span> <span class="token class-name">B</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//约定空树不是任意一个树的子结构</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">B</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> <span class="token class-name">A</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token function">dp</span><span class="token punctuation">(</span><span class="token class-name">A</span><span class="token punctuation">,</span> <span class="token class-name">B</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">isSubStructure</span><span class="token punctuation">(</span><span class="token class-name">A</span><span class="token punctuation">.</span>left<span class="token punctuation">,</span> <span class="token class-name">B</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">isSubStructure</span><span class="token punctuation">(</span><span class="token class-name">A</span><span class="token punctuation">.</span>right<span class="token punctuation">,</span> <span class="token class-name">B</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//dp的作用是判断从A 的根节点出发，是否存在跟B 结构相同的树。</span>
+    <span class="token keyword">boolean</span> <span class="token function">dp</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> <span class="token class-name">A</span><span class="token punctuation">,</span> <span class="token class-name">TreeNode</span> <span class="token class-name">B</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">B</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">A</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> <span class="token class-name">B</span><span class="token punctuation">.</span>val <span class="token operator">!=</span> <span class="token class-name">A</span><span class="token punctuation">.</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token function">dp</span><span class="token punctuation">(</span><span class="token class-name">A</span><span class="token punctuation">.</span>left<span class="token punctuation">,</span> <span class="token class-name">B</span><span class="token punctuation">.</span>left<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">dp</span><span class="token punctuation">(</span><span class="token class-name">A</span><span class="token punctuation">.</span>right<span class="token punctuation">,</span> <span class="token class-name">B</span><span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h2 id="_27、二叉树的镜像"><a href="#_27、二叉树的镜像" class="header-anchor">#</a> 27、二叉树的镜像</h2> <div class="custom-block tip"><p class="custom-block-title">easy</p> <p>请完成一个函数，输入一个二叉树，该函数输出它的镜像。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>例如输入：
+     4    
+   /   \   
+  2      7  
+ /  \	 /  \ 
+1   3  6   9
+镜像输出：
+	  4    
+   /   \   
+  7      2  
+ /  \	 /  \ 
+9   6  3   1
+示例 1：
+输入：root = [4,2,7,1,3,6,9]
+输出：[4,7,2,9,6,3,1]
+限制：
+0 &lt;= 节点个数 &lt;= 1000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div></div> <p>前面说了二叉树基本就是递归，这里所谓的镜像只需要把左右子树互换位置即可</p> <p>递归结束条件更简单就是当前节点为null</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token class-name">TreeNode</span> <span class="token function">mirrorTree</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token class-name">TreeNode</span> temp<span class="token punctuation">;</span>
+        temp <span class="token operator">=</span> root<span class="token punctuation">.</span>left<span class="token punctuation">;</span>
+        root<span class="token punctuation">.</span>left <span class="token operator">=</span> root<span class="token punctuation">.</span>right<span class="token punctuation">;</span>
+        root<span class="token punctuation">.</span>right <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+        <span class="token function">mirrorTree</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">mirrorTree</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> root<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h2 id="_28、对称的二叉树"><a href="#_28、对称的二叉树" class="header-anchor">#</a> 28、对称的二叉树</h2> <div class="custom-block tip"><p class="custom-block-title">easy</p> <p>请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+	  1    
+   /   \   
+  2      2  
+ /  \	 /  \ 
+3   4  4   3
+但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+	  1    
+   /   \   
+  2      2  
+   \	   \ 
+    3      3
+
+示例 1：
+输入：root = [1,2,2,3,4,4,3]
+输出：true
+
+示例 2：
+输入：root = [1,2,2,null,3,null,3]
+输出：false
+
+限制：
+0 &lt;= 节点个数 &lt;= 1000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p>注意：本题与主站 101 题相同：https://leetcode-cn.com/problems/symmetric-tree/</p></div> <p>同样是递归，但是绕了个圈子</p> <p>如果直接拿二叉树就开始递归，那没办法做到判断是否对称</p> <p>需要先将二叉树划分为左右树，然后在递归中同步遍历两个树，主要递归遍历时左右树的方向要相反(即左树的左子树和右树的右子树比较)</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isSymmetric</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token function">checkTree</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">boolean</span> <span class="token function">checkTree</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> leftTree<span class="token punctuation">,</span> <span class="token class-name">TreeNode</span> rightTree<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 两边子树均遍历到叶子，true</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>leftTree <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> rightTree <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 只有一边到叶子，不说不是对称的</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>leftTree <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> rightTree <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 值不相等，不是对称</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>leftTree<span class="token punctuation">.</span>val <span class="token operator">!=</span> rightTree<span class="token punctuation">.</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 值相等，继续比较子树，注意要左树的左子树和右树的右子树比较</span>
+        <span class="token keyword">return</span> <span class="token function">checkTree</span><span class="token punctuation">(</span>leftTree<span class="token punctuation">.</span>left<span class="token punctuation">,</span> rightTree<span class="token punctuation">.</span>right<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">checkTree</span><span class="token punctuation">(</span>leftTree<span class="token punctuation">.</span>right<span class="token punctuation">,</span> rightTree<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><h2 id="_29、顺时针打印矩阵"><a href="#_29、顺时针打印矩阵" class="header-anchor">#</a> 29、顺时针打印矩阵</h2> <div class="custom-block tip"><p class="custom-block-title">easy</p> <p>输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>示例 1：
+输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+输出：[1,2,3,6,9,8,7,4,5]
+
+示例 2：
+输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+输出：[1,2,3,4,8,12,11,10,9,5,6,7]
+
+限制：
+- 0 &lt;= matrix.length &lt;= 100
+- 0 &lt;= matrix[i].length &lt;= 100
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>注意：本题与主站 54 题相同：https://leetcode-cn.com/problems/spiral-matrix/</p></div> <p>按照题目意思来编写循环即可，需要4个变量来存储上下左右4个边界</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">spiralOrder</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> matrix<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 空数组校验</span>
+        <span class="token keyword">int</span> row <span class="token operator">=</span> matrix<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>row <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">int</span> column <span class="token operator">=</span> matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>column <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 结果以四个方向的限制设置</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> result <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>row <span class="token operator">*</span> column<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> top <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> bottom <span class="token operator">=</span> row <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> right <span class="token operator">=</span> column <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment">// 按4个方向依次遍历，并移动方向限制</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> left<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> right<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                result<span class="token punctuation">[</span>res<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> matrix<span class="token punctuation">[</span>top<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>top <span class="token operator">&gt;</span> bottom<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> top<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> bottom<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                result<span class="token punctuation">[</span>res<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">--</span>right <span class="token operator">&lt;</span> left<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> right<span class="token punctuation">;</span> i <span class="token operator">&gt;=</span> left<span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                result<span class="token punctuation">[</span>res<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> matrix<span class="token punctuation">[</span>bottom<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">--</span>bottom <span class="token operator">&lt;</span> top<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> bottom<span class="token punctuation">;</span> i <span class="token operator">&gt;=</span> top<span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                result<span class="token punctuation">[</span>res<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>left <span class="token operator">&gt;</span> right<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br></div></div><h2 id="_30、包含min函数的栈"><a href="#_30、包含min函数的栈" class="header-anchor">#</a> 30、包含min函数的栈</h2> <div class="custom-block tip"><p class="custom-block-title">easy</p> <p>定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的 min 函数在该栈中，调用 min、push 及 pop 的时间复杂度都是 O(1)。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>示例:
+MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.min();   --&gt; 返回 -3.
+minStack.pop();
+minStack.top();      --&gt; 返回 0.
+minStack.min();   --&gt; 返回 -2.
+
+提示：
+1. 各函数的调用总次数不超过 20000 次
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>注意：本题与主站 155 题相同：https://leetcode-cn.com/problems/min-stack/</p></div> <p>采用ArrayList来实现栈，入栈出栈非常容易</p> <p>最小值，最初版是直接调用Collections.min()来做，但耗时400ms以上，非常慢</p> <p>原因是每次调用min都需要查找一遍，于是做了个优化：用一个变量来保存min，每次入栈出栈时判断是否要更新最小值</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">MinStack</span> <span class="token punctuation">{</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">&gt;</span></span> stack<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> min<span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * initialize your data structure here.
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">MinStack</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        stack <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        min <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token constant">MAX_VALUE</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        stack<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        min <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>min<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Integer</span> remove <span class="token operator">=</span> stack<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>stack<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>min <span class="token operator">==</span> remove<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>stack<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                min <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token constant">MAX_VALUE</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                min <span class="token operator">=</span> <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>stack<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> stack<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>stack<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> min<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br></div></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">更新时间:</span> <span class="time">2024/1/3 10:18:45</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/md/algorithm/offer/2023-05-20-2-剑指offer.html" class="prev">
+        第二章、剑指offer(11~20)
+      </a></span> <span class="next"><a href="/md/algorithm/offer/2023-06-11-4-剑指offer.html">
+        第四章、剑指offer(31~40)
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.23be6c0f.js" defer></script><script src="/assets/js/2.50cace40.js" defer></script><script src="/assets/js/1.c3bdb197.js" defer></script><script src="/assets/js/40.1da35dfb.js" defer></script>
+  </body>
+</html>
